@@ -3,6 +3,10 @@
 application/cache/*
 !application/cache/index.html
 
+resource/fontawesome
+
+node_modules
+
 application/logs/*
 !application/logs/index.html
 

@@ -7,7 +7,6 @@
 	<title>Login - Mazer Admin Dashboard</title>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="<?= base_url('/resource/css/bootstrap.css'); ?>">
-	<link rel="stylesheet" href="<?= base_url('/resource/vendors/bootstrap-icons/bootstrap-icons.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('/resource/css/app.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('/resource/css/pages/auth.css') ?>">
 </head>
@@ -18,13 +17,14 @@
 		<div class="row h-100">
 			<div class="col-lg-5 col-12 order-1">
 				<div id="auth-left">
+								<i class="fa-regular fa-user"></i>
 					<h1 class="auth-title text-center">Login</h1>
 
 					<form action="index.html" class="mt-4">
 						<div class="form-group position-relative has-icon-left mb-4">
 							<input type="text" class="form-control form-control-xl" placeholder="Username">
 							<div class="form-control-icon">
-								<i class="bi bi-person"></i>
+								<i class="fa-regular fa-user"></i>
 							</div>
 						</div>
 						<div class="form-group position-relative has-icon-left mb-4">
@@ -51,6 +51,7 @@
 		</div>
 
 	</div>
+	<script src="https://kit.fontawesome.com/7eaa0f0932.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
