@@ -1,0 +1,38 @@
+body {
+  background-color: #fff;
+}
+#auth {
+  height: 100vh;
+  overflow-x: hidden;
+}
+#auth #auth-right {
+  height: 100%;
+  background: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"),
+  linear-gradient(90deg, #2d499d, #3f5491);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#auth #auth-left {
+  padding: 5rem 8rem;
+}
+#auth #auth-left .auth-title {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+#auth #auth-left .auth-subtitle {
+  font-size: 1.7rem;
+  line-height: 2.5rem;
+  color: #a8aebb;
+}
+#auth #auth-left .auth-logo {
+  margin-bottom: 7rem;
+}
+#auth #auth-left .auth-logo img {
+  height: 2rem;
+}
+@media screen and (max-width: 767px) {
+  #auth #auth-left {
+    padding: 5rem;
+  }
+}
