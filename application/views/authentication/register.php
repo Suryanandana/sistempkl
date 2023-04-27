@@ -21,25 +21,19 @@
                     <h1 class="auth-title">Daftar PKL</h1>
                     <form action="index.html">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Email">
+                            <input type="text" class="form-control form-control-xl" placeholder="NIM">
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Username">
+                            <input type="text" class="form-control form-control-xl" placeholder="Nama Lengkap">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Confirm Password">
+                            <input type="text" class="form-control form-control-xl" placeholder="Email">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
