@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Authentication extends CI_Controller
+class CAuthentication extends CI_Controller
 {
     public function tampilLogin()
     {
