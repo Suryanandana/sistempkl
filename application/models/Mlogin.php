@@ -14,13 +14,10 @@
 			{
 				//ada data	
 				$data=$query->row();
-				$Username=$data->Username;
-				
-				$session=array(
-					'Username'=>$Username,
-				);
+				// ambil levelnya untuk di validasi
+				$session=(array)$data;
 
-				$this->session->set_userdata($session);
+				$this->session->set_userdata($session);				
 
 				redirect('admin');
 			}
