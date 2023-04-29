@@ -22,13 +22,13 @@
 
 				$this->session->set_userdata($session);
 
-				redirect('admin/index');
+				redirect('admin');
 			}
 			else
 			{
 				//tidak ada data	
 				$this->session->set_flashdata('pesan','Login gagal');
-				redirect('authentication/tampilLogin');
+				redirect('login');
 				
 			}
 		}

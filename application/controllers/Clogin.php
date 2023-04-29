@@ -13,7 +13,7 @@
 		}
 		function logout() {
 			$this->session->sess_destroy();
-			redirect('authentication/tampilLogin');
+			redirect('login');
 		}
 
     }
