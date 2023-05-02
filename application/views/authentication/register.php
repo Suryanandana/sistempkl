@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<?= base_url('/node_modules/bootstrap-icons/font/bootstrap-icons.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/resource/css/app.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/resource/css/pages/auth.css') ?>">
+    <!-- custom css -->
+    <link rel="stylesheet" href="<?= base_url('/resource/css/style.css') ?>">
 </head>
 
 <body>
@@ -18,7 +20,17 @@
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-                    <h1 class="auth-title">Daftar PKL</h1>
+                    <h1 class="auth-title" style="font-size:57px">Daftar PKL</h1>
+                    <?php if ($this->session->has_userdata('regis_gagal')): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $this->session->userdata('regis_gagal'); ?>
+                        </div>
+                    <?php endif ?>
+                    <?php if ($this->session->has_userdata('regis_berhasil')): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= $this->session->userdata('regis_berhasil'); ?>
+                        </div>
+                    <?php endif ?>
                     <form name="formdaftar" id="formdaftar" method="post" action="<?php echo base_url('cpendaftaran/insert_data'); ?>">
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" name="nim" id="nim" placeholder="NIM">
@@ -38,7 +50,7 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" onclick="insert_data()" >Daftar</button>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-3" onclick="insert_data()" >Daftar</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class='text-gray-600'>Sudah punya akun? <a href="<?= base_url('/login') ?>"
