@@ -21,6 +21,12 @@
 					<h1 class="auth-title text-center">Login</h1>
 
 					<form name="formlogin" id="formlogin" method="post" action="<?php echo base_url('clogin/proseslogin'); ?>" class="mt-4">
+					<?php if ($this->session->has_userdata('login_gagal')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
+                            <?= $this->session->userdata('login_gagal'); ?>
+                            <button type="button" class="btn-close position-absolute" style="top:50%; transform: translateY(-50%);" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
 						<div class="form-group position-relative has-icon-left mb-4">
 							<input type="text" class="form-control form-control-xl" placeholder="Username" id="Username" name="Username">
 							<div class="form-control-icon">
@@ -49,6 +55,8 @@
 			</div>
 		</div>
 	</div>
+	<script src="<?= base_url('resource/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('resource/js/main.js') ?>"></script>
 </body>
 
 </html>

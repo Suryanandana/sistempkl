@@ -4,11 +4,10 @@
 
 		function proseslogin()
 		{
-			$Username=$this->input->post('Username');
-			$Password=$this->input->post('Password');
+			$username=$this->input->post('Username');
+			$password=$this->input->post('Password');
 			
-			$sql="select * from login where Username='".$Username."' ";
-			$sql.="and Password='".$Password."'";
+			$sql="select * from login where Username='$username' AND Password='$password' AND status='Admin'";
 			$query=$this->db->query($sql);	
 			if ($query->num_rows()>0)
 			{
@@ -18,15 +17,15 @@
 				$session=(array)$data;
 
 				$this->session->set_userdata($session);				
-
-				redirect('admin');
+				echo "<script>alert('berhasil login!')
+				window.location.replace('../admin')</script>";
+				
 			}
 			else
 			{
 				//tidak ada data	
-				$this->session->set_flashdata('pesan','Login gagal');
+				$this->session->set_flashdata('login_gagal','Login gagal! Username atau Password salah!');
 				redirect('login');
-				
 			}
 		}
 	}
