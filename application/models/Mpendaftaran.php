@@ -32,7 +32,7 @@
             else
             {
                 $this->db->trans_commit();
-                $message = "Transaksi berhasil! Silahkan periksa email untuk melihat akun!";
+                $message = "Registrasi berhasil! Periksa email untuk melihat akun!";
                 $this->session->set_flashdata('regis_berhasil', $message);
             }
             $this->db->db_debug = $db_debug;

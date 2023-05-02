@@ -1,9 +1,9 @@
 <?php
-parse_str(implode('&', array_slice($argv, 1)), $_GET);
-if (empty($_GET['name'])) {
-    echo 'Please write "name=filename"' . PHP_EOL . 'or optional option "name=directory/filename"';
+$args = $argv[1];
+if (empty($args)) {
+    echo 'Please write a controller name!';
+    die;
 } else {
-    $args = $_GET['name'];
     $target_dir = "application/controllers";
     if (strpos($args, '/')) {
         $arg = explode('/', $args);

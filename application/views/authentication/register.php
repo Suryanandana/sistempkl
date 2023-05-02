@@ -22,13 +22,15 @@
                 <div id="auth-left">
                     <h1 class="auth-title" style="font-size:57px">Daftar PKL</h1>
                     <?php if ($this->session->has_userdata('regis_gagal')): ?>
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
                             <?= $this->session->userdata('regis_gagal'); ?>
+                            <button type="button" class="btn-close position-absolute" style="top: 50%; transform: translateY(-50%);" id="alert-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif ?>
                     <?php if ($this->session->has_userdata('regis_berhasil')): ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show position-relative" role="alert">
                             <?= $this->session->userdata('regis_berhasil'); ?>
+                            <button type="button" class="btn-close position-absolute" style="top: 50%; transform: translateY(-50%);" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif ?>
                     <form name="formdaftar" id="formdaftar" method="post" action="<?php echo base_url('cpendaftaran/insert_data'); ?>">

@@ -5,6 +5,8 @@ application/cache/*
 
 resource/fontawesome
 
+.vscode/
+
 node_modules
 
 application/logs/*
