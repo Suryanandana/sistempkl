@@ -17,18 +17,19 @@
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
+	"require-dev": {
+		"robmorgan/phinx": "^0.13.4"
+	},
+
 	"scripts": {
 		"create-controller": "php application/console/index.php",
 		"phinx-init": "php vendor/bin/phinx init",
 		"phinx-test": "vendor/bin/phinx test",
 		"create-migration": "vendor/bin/phinx create",
-		"migrate": "phinx migrate -e development",
-		"rollback": "phinx rollback -e development",
-		"status": "vendor/bin/phinx/ status -e development",
+		"migrate": "vendor/bin/phinx migrate -e development",
+		"rollback": "vendor/bin/phinx rollback -e development",
+		"phinx-status": "vendor/bin/phinx/ status -e development",
 		"create-seed": "vendor/bin/phinx seed:create",
 		"run-seed": "vendor/bin/phinx seed:run"
-	},
-	"require-dev": {
-		"robmorgan/phinx": "^0.13.4"
 	}
 }

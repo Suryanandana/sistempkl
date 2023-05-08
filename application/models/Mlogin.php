@@ -7,19 +7,20 @@
 			$username=$this->input->post('Username');
 			$password=$this->input->post('Password');
 			
-			$sql="select * from login where Username='$username' AND Password='$password' AND status='Admin'";
+			$sql="select * from login where Username='$username' AND Password='$password'";
 			$query=$this->db->query($sql);	
 			if ($query->num_rows()>0)
 			{
 				//ada data	
 				$data=$query->row();
-				// ambil levelnya untuk di validasi
+				// buat session
 				$session=(array)$data;
-
-				$this->session->set_userdata($session);				
-				echo "<script>alert('berhasil login!')
-				window.location.replace('../admin')</script>";
-				
+				// ambil levelnya untuk di validasi
+				$this->session->set_userdata($session);
+				// jika level yang mencoba login adalah admin
+				if($session['status'] == "Admin") {
+					redirect("Cadmin");
+				}
 			}
 			else
 			{

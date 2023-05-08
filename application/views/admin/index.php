@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <?php var_dump($this->session->userdata('status')); ?>
     <div id="app">
         <div id="sidebar" class="active position-relative">
             <div class="sidebar-wrapper active">
