@@ -21,6 +21,15 @@
 				if($session['status'] == "Admin") {
 					redirect("Cadmin");
 				}
+				if($session['status'] == "Mahasiswa") {
+					redirect("Cmahasiswa");
+				}
+				if($session['status'] == "Pembimbing_Kampus") {
+					redirect("Cpkampus");
+				}
+				if($session['status'] == "Pembimbing_Industri") {
+					redirect("Cpindustri");
+				}
 			}
 			else
 			{
