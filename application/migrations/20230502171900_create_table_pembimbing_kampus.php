@@ -3,15 +3,16 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateTableMahasiswa extends AbstractMigration
+final class CreateTablePembimbingKampus extends AbstractMigration
 {
     public function change(): void
     {
-        $table = $this->table('Mahasiswa', ['id' => false, 'primary_key' => 'nim']);
+        $table = $this->table('Pembimbing_Kampus', ['id' => false, 'primary_key' => 'nip']);
         $table
-            ->addColumn('nim', 'string', ['length' => 10])
+            ->addColumn('nip', 'string', ['length' => 18])
             ->addColumn('email', 'string', ['length' => 60, 'null' => false])
             ->addColumn('nama_lengkap', 'string', ['length' => 60, 'null' => false])
+            ->addColumn('bidang_ilmu', 'string', ['length' => 30, 'null' => true])
             ->addColumn('no_hp', 'string', ['length' => 15, 'null' => true])
             ->addColumn('jenis_kelamin', 'enum', [
                 'null' => true,
@@ -28,6 +29,5 @@ final class CreateTableMahasiswa extends AbstractMigration
             ->addIndex('nama_lengkap')
             ->addIndex('email', ['unique' => true])
             ->create();
-
     }
 }
