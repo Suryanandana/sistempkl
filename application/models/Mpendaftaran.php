@@ -12,8 +12,10 @@
             $this->db->trans_begin();
             $this->db->insert('login', $data2);
             $this->db->insert('mahasiswa', $data1);
+            // mengecek apakah terjadi kegagalan dlm transaksi database
             if ($this->db->trans_status() === FALSE)
             {
+                // mengambil informasi terkait error. 
                 $error = $this->db->error();
                 echo $error['message'];
                 if(str_contains($error['message'], 'Duplicate entry')){
@@ -27,11 +29,11 @@
                     $message = 'Registrasi gagal!';
                 }
                 $this->session->set_flashdata('regis_gagal', $message);
-                $this->db->trans_rollback();
+                $this->db->trans_rollback(); // membatalkan transaksi
             }
             else
             {
-                $this->db->trans_commit();
+                $this->db->trans_commit(); //menyimpan semua transaksi
                 $message = "Registrasi berhasil! Periksa email untuk melihat akun!";
                 $this->session->set_flashdata('regis_berhasil', $message);
             }
