@@ -21,6 +21,10 @@
 				if($session['status'] == "Admin") {
 					redirect("Cadmin");
 				}
+				// jika level yang mencoba login adalah mahasiswa
+				if($session['status'] == "Mahasiswa") {
+					redirect("Cmahasiswa");
+				}
 			}
 			else
 			{
