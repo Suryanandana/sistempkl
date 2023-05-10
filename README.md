@@ -1,3 +1,13 @@
+Reset migration
+```sh
+vendor/bin/phinx rollback -e development -t 0
+```
+
+eksekusi migration
+```sh
+vendor/bin/phinx migrate
+```
+
 Perintah trigger
 ```sh
 DELIMITER $$
