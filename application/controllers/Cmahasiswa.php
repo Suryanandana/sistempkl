@@ -25,4 +25,12 @@ class Cmahasiswa extends CI_Controller
         // tampilkan view profile ke view main
         $this->load->view('mahasiswa/main', $data);
     }
+
+    public function form()
+    {
+        // masukkan view profile ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/form', [], true);
+        // tampilkan view profile ke view main
+        $this->load->view('mahasiswa/main', $data);
+    }
 }
