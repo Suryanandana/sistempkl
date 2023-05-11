@@ -12,6 +12,17 @@ class Cmahasiswa extends CI_Controller
 
     public function index()
     {
-        $this->load->view('mahasiswa/index');
+        // masukkan view dashboard ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/dashboard', [], true);
+        // tampilkan view dashboard ke view main
+        $this->load->view('mahasiswa/main', $data);
+    }
+
+    public function profile()
+    {
+        // masukkan view profile ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/profile', [], true);
+        // tampilkan view profile ke view main
+        $this->load->view('mahasiswa/main', $data);
     }
 }
