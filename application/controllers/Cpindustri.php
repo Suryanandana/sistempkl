@@ -9,10 +9,18 @@ class Cpindustri extends CI_Controller
         $this->load->model('mvalidasi');
         $this->mvalidasi->validasiPindustri();
     }
+
 	public function index()
-	
 	{
-		$this->load->view('pindustri/index');	
-		
+        //mengirim view dashboard ke dalam variabel data ['conten']
+		$data['content'] = $this->load->view('pindustri/dashboard', [], true);	
+        //menampilkan view dashboard ke view admin
+        $this->load->view('pindustri/main', $data);
 	}
+
+    public function profile()
+    {
+        $data['content'] = $this->load->view('pindustri/profile', [], true);
+        $this->load->view('pindustri/main', $data);
+    }
 }

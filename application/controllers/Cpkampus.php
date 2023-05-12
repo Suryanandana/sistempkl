@@ -10,8 +10,16 @@ class Cpkampus extends CI_Controller
         $this->load->model('mvalidasi');
         $this->mvalidasi->validasiPkampus();
     }
+
 	public function index()
 	{
-		$this->load->view('pkampus/index');		
+		$data['content'] = $this->load->view('pkampus/dashboard', [], true);
+        $this->load->view('pkampus/main', $data);
 	}
+
+    public function profile() 
+    {
+        $data['content'] = $this->load->view('pkampus/profile', [], true);
+        $this->load->view('pkampus/main', $data);
+    }
 }

@@ -107,8 +107,7 @@
                 </div>
                 <div class="aside-footer flex-column-auto px-6 pb-5" id="kt_aside_footer">
                     <a href="javascript:void(0)" onclick="logout();" class="btn btn-light-danger w-100"
-                        data-bs-toggle="tooltip" data-bs-html="true" data-bs-trigger="hover"
-                        title="Upgrade to Pro to get &lt;br/&gt;the best of Rider">Log Out</a>
+                        data-bs-toggle="tooltip" data-bs-html="true">Log Out</a>
                 </div>
             </div>
             <!-- Sidebar End -->
