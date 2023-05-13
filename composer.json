@@ -30,6 +30,7 @@
 		"rollback": "vendor/bin/phinx rollback -e development",
 		"phinx-status": "vendor/bin/phinx/ status -e development",
 		"create-seed": "vendor/bin/phinx seed:create",
-		"run-seed": "vendor/bin/phinx seed:run"
+		"run-seed": "vendor/bin/phinx seed:run",
+		"rollback-reset": "vendor/bin/phinx rollback -e development -t 0"
 	}
 }

@@ -1,8 +1,8 @@
 # DOKUMENTASI SISTEM PKL
 
 ## DAFTAR ISI
-1. [Git Command](https://github.com/Suryanandana/sistempkl#alur-pengerjaan-git)
-2. [Database Command](https://github.com/Suryanandana/sistempkl#database)
+1. [Git Command](https://github.com/Suryanandana/sistempkl#git-command)
+2. [Database Command](https://github.com/Suryanandana/sistempkl#database-command)
 ## GIT COMMAND
 Dokumentasi untuk coomand line yang berhubungan dengan git.
 Pastikan path atau lokasi terminal sudah dalam project sistem pkl.
@@ -45,23 +45,27 @@ Secara default pathnya: C:\xampp\htdocs\sistempkl
 ### Reset migration
 Jalankan perintah dibawah untuk melakukan reset seluruh tabel pada database
 ```sh
-vendor/bin/phinx rollback -e development -t 0
+composer rollback-reset
 ```
 ### Eksekusi Migration
 Jalankan perintah dibawah untuk membuat seluruh tabel pada database
 ```sh
-vendor/bin/phinx migrate
+composer migrate
 ```
 ### Eksekusi Seeder
 Jalankan perintah dibawah untuk mengisi data pada database
 ```sh
-vendor/bin/phinx seed:run
+composer run-seed
 ```
 ### Daftar Data Dummy
-Berikut adalah list daftar dummy yang bisa digunakan saat login pada sistem
-```sh
-vendor/bin/phinx seed:run
-```
+Berikut adalah list daftar dummy yang bisa digunakan saat login pada sistem.
+Dengan catatan sudah menjalankan perintah [seeder](https://github.com/Suryanandana/sistempkl#eksekusi-seeder)
+| Username           | Password   | Level               |
+| :----------------- | :--------- | :------------------ |
+| Admin              | admin123   | Admin               |
+| 2115354034         | budi123    | Mahasiswa           |
+| 111111111111111111 | sucipto123 | Pembimbing_Kampus   |
+| bruno@gmail.com    | bruno123   | Pembimbing_Industri |
 ### Perintah Trigger
 Kusus untuk trigger jalankan pada phpmyadmin lalu pilih database sistempkl.
 Lalu pada menu bagian atas pilih sql dan paste disana lalu go
