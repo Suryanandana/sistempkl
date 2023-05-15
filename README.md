@@ -63,7 +63,7 @@ Dengan catatan sudah menjalankan perintah [seeder](https://github.com/Suryananda
 | Username           | Password   | Level               |
 | :----------------- | :--------- | :------------------ |
 | Admin              | admin123   | Admin               |
-| 2115354034         | budi123    | Mahasiswa           |
+| 2115354001         | budi123    | Mahasiswa           |
 | 111111111111111111 | sucipto123 | Pembimbing_Kampus   |
 | bruno@gmail.com    | bruno123   | Pembimbing_Industri |
 ### Perintah Trigger

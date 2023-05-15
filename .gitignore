@@ -4,6 +4,7 @@ application/cache/*
 !application/cache/index.html
 
 resource/fontawesome
+resource/img/fotoMahasiswa
 
 .vscode/
 
