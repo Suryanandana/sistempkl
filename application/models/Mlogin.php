@@ -8,7 +8,7 @@
 			$password=$this->input->post('Password');
 			
 			$sql="select * from login where Username='$username' AND Password='$password'";
-			$query=$this->db->query($sql);	
+			$query=$this->db->query($sql);
 			if ($query->num_rows()>0)
 			{
 				//ada data	
