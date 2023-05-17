@@ -25,6 +25,12 @@
 					redirect("Cpkampus");
 				}
 				if($session['status'] == "Pembimbing_Industri") {
+					$this->db->select('id_pembimbing_industri');
+					$this->db->from('pembimbing_industri');
+					$this->db->where('email', $session['username']);
+					$query = $this->db->get();
+            		$data = $query->result();
+					$this->session->set_userdata(["username" => $data[0]->id_pembimbing_industri]);
 					redirect("Cpindustri");
 				}
 				// jika level yang mencoba login adalah mahasiswa
