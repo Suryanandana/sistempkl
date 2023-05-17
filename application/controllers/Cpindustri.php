@@ -58,7 +58,6 @@ class Cpindustri extends CI_Controller
         // simpan data
         $this->load->model('mpindustri');
         $this->mpindustri->simpanProfile($_POST);
-        // tampilkan halaman profile mhs
         redirect('cpindustri/profile');
     }
 }

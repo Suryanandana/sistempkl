@@ -20,7 +20,7 @@
 					<div class="cursor-pointer symbol symbol-circle symbol-30px symbol-md-40px"
 						data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end"
 						data-kt-menu-flip="bottom">
-						<img alt="Pic" src="<?= base_url('/resource/img/avatars/150-1.jpg'); ?>" />
+						<img alt="Pic" src="<?= (isset($data->foto)) ? base_url('resource/img/fotoPembimbingIndustri/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
 					</div>
 				</div>
 			</div>

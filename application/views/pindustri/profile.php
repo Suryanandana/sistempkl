@@ -42,7 +42,8 @@
                             src="<?= (isset($data->foto)) ? base_url('resource/img/fotoPembimbingIndustri/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                                 </div>
                                 <a href="#"
-                                    class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1"><?= $data->nama_lengkap; ?></a>
+                                    class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1"><?= $data->nama_lengkap; ?>
+                                </a>
                                 <div class="fs-6 fw-bold text-gray-400 mb-2">Pembimbing Industri</div>
                                 <div class="fs-6 fw-bold text-gray-400 mb-2">Politeknik Negeri Bali</div>
                             </div>
@@ -65,7 +66,7 @@
                                 <div class="alert alert-success"><?= $this->session->flashdata('pesan_berhasil'); ?></div>
                             <?php endif; ?>
                             <?php if($this->session->flashdata('pesan_gagal')) : ?>
-                                <div class="alert alert-success"><?= $this->session->flashdata('pesan_gagal'); ?></div>
+                                <div class="alert alert-danger"><?= $this->session->flashdata('pesan_gagal'); ?></div>
                             <?php endif; ?>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Email</label>
@@ -247,3 +248,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    var genderValue = "<?= $data->jenis_kelamin; ?>";
+    var genderOption = document.querySelector("#gender option[value='" + genderValue + "']");
+    genderOption.selected = true;
+
+    var agamaValue = "<?= $data->agama; ?>";
+    var agamaOption = document.querySelector("#agama option[value='" + agamaValue + "']");
+    agamaOption.selected = true;
+</script>

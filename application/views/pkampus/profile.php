@@ -1,3 +1,4 @@
+<?php $data = $data[0]; ?>
 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
     <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
         data-kt-sticky-offset="{default: '200px', lg: '300px'}">
@@ -19,7 +20,7 @@
                     <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-md-40px"
                         data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end"
                         data-kt-menu-flip="bottom">
-                        <img alt="Pic" src="<?= base_url('resource/img/avatars/150-1.jpg'); ?>" />
+                        <img alt="Pic" src="<?= (isset($data->foto)) ? base_url('resource/img/fotoPembimbingKampus/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                     </div>
                 </div>
             </div>
@@ -36,25 +37,13 @@
                         <div class="card-body pt-10 p-10">
                             <div class="d-flex flex-center flex-column mb-10">
                                 <div class="symbol mb-3 symbol-100px symbol-circle">
-                                    <img alt="Pic" src="<?= base_url('resource/img/avatars/150-1.jpg'); ?>" />
+                                    <img alt="Pic" src="<?= (isset($data->foto)) ? base_url('resource/img/fotoPembimbingKampus/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                                 </div>
                                 <a href="#"
-                                    class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1"><?= $this->session->userdata('username') ?></a>
-                                <div class="fs-6 fw-bold text-gray-400 mb-2">Art Director</div>
-                                <div class="d-flex flex-center">
-                                    <a href="#" class="btn btn-sm btn-light-primary py-2 px-4 fw-bolder me-2"
-                                        data-kt-drawer-show="true" data-kt-drawer-target="#kt_drawer_chat">Send
-                                        Message</a>
-                                </div>
-                            </div>
-                            <div class="border border-dashed border-gray-300 bg-lighten card-rounded p-6">
-                                <h5 class="mb-4">Account Status</h5>
-                                <div class="mb-3">
-                                    <span class="badge bg-success me-2 card-rounded">Basic Bundle</span>
-                                    <span class="fw-bold text-gray-600">$149.99 / Year</span>
-                                </div>
-                                <a href="#" class="text-link fs-7 fw-bolder" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_upgrade_plan">Upgrade to Pro</a>
+                                    class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1"><?= $data->nama_lengkap; ?>
+                                </a>
+                                <div class="fs-6 fw-bold text-gray-400 mb-2">Pembimbing Kampus</div>
+                                <div class="fs-6 fw-bold text-gray-400 mb-2">Politeknik Negeri Bali</div>
                             </div>
                         </div>
                     </div>
@@ -70,51 +59,68 @@
                                 data-bs-target="#kt_modal_1">Edit Profile</button>
                         </div>
                         <div class="card-body p-9">
+                            <?php if($this->session->flashdata('pesan_berhasil')) : ?>
+                                <div class="alert alert-success">
+                                    <?= $this->session->flashdata('pesan_berhasil'); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if($this->session->flashdata('pesan_gagal')) : ?>
+                                <div class="alert alert-danger">
+                                    <?= $this->session->flashdata('pesan_gagal'); ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Full Name</label>
+                                <label class="col-lg-4 fw-bold text-muted">Email</label>
                                 <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-dark">Max Smith</span>
+                                    <span class="fw-bolder fs-6 text-dark"><?= $data->email; ?></span>
                                 </div>
                             </div>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Company</label>
+                                <label class="col-lg-4 fw-bold text-muted">Nama Lengkap</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6">Keenthemes</span>
+                                    <span class="fw-bold fs-6"><?= $data->nama_lengkap; ?></span>
                                 </div>
                             </div>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Contact Phone
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                        title="Phone number must be active"></i></label>
-                                <div class="col-lg-8 d-flex align-items-center">
-                                    <span class="fw-bolder fs-6 me-2">044 3276 454 935</span>
-                                    <span class="badge badge-success">Verified</span>
+                                <label class="col-lg-4 fw-bold text-muted">Bidang Ilmu</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->bidang_ilmu; ?></span>
                                 </div>
                             </div>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Company Site</label>
-                                <div class="col-lg-8">
-                                    <a href="#" class="fw-bold fs-6 text-dark text-hover-primary">keenthemes.com</a>
+                                <label class="col-lg-4 fw-bold text-muted">No Hp</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->no_hp; ?></span>
                                 </div>
                             </div>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Country
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                        title="Country of origination"></i></label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-dark">Germany</span>
+                                <label class="col-lg-4 fw-bold text-muted">Jenis Kelamin</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->jenis_kelamin; ?></span>
                                 </div>
                             </div>
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Communication</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-dark">Email, Phone</span>
+                                <label class="col-lg-4 fw-bold text-muted">Tempat Lahir</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->tempat_lahir; ?></span>
                                 </div>
                             </div>
-                            <div class="row mb-10">
-                                <label class="col-lg-4 fw-bold text-muted">Allow Changes</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bold fs-6">Yes</span>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Tanggal Lahir</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->tanggal_lahir; ?></span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Alamat</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->alamat; ?></span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Agama</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold fs-6"><?= $data->agama; ?></span>
                                 </div>
                             </div>
                             <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
@@ -128,11 +134,8 @@
                                 </span>
                                 <div class="d-flex flex-stack flex-grow-1">
                                     <div class="fw-bold">
-                                        <h4 class="text-gray-800 fw-bolder">We need your attention!</h4>
-                                        <div class="fs-6 text-gray-600">Your payment was declined. To start using
-                                            tools, please
-                                            <a class="fw-bolder" href="account/billing.html">Add Payment Method</a>.
-                                        </div>
+                                        <h4 class="text-gray-800 fw-bolder">Perhatian!</h4>
+                                        <div class="fs-6 text-gray-600">Pastikan data yang diinput sudah benar.</div>
                                     </div>
                                 </div>
                             </div>
@@ -159,14 +162,97 @@
                 <!--end::Close-->
             </div>
 
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
+            <form action="<?= base_url('cpkampus/simpanProfile'); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="hidden" name="nip" value="<?= $data->nip; ?>">
+                            <label>NIM</label>
+                            <input type="text" class="form-control" value="<?= $data->nip; ?>" name="nip" disabled />
+                        </div>
+                        <div class="col-6">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email" value="<?= $data->email; ?>" />
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control" name="nama_lengkap"
+                                value="<?= $data->nama_lengkap; ?>" />
+                        </div>
+                        <div class="col-6">
+                            <label>Bidang Ilmu</label>
+                            <input type="text" class="form-control" name="bidang_ilmu" value="<?= $data->bidang_ilmu; ?>" />
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <label>Nomer Hp</label>
+                            <input type="text" class="form-control" name="no_hp" value="<?= $data->no_hp; ?>" />
+                        </div>
+                        <div class="col-6">
+                            <label>Jenis Kelamin</label>
+                            <!-- kusus untuk input select gunakan id -->
+                            <select class="form-select" name="jenis_kelamin" id="gender">
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <label>Tempat Lahir</label>
+                            <input type="text" class="form-control" name="tempat_lahir"
+                            value="<?= $data->tempat_lahir; ?>" />
+                        </div>
+                        <div class="col-6">
+                            <label>Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="tanggal_lahir"
+                                value="<?= $data->tanggal_lahir; ?>" />
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <label>Alamat</label>
+                            <input type="text" class="form-control" name="alamat" value="<?= $data->alamat; ?>" />
+                        </div>
+                        <div class="col-6">
+                            <label>Agama</label>
+                            <!-- kusus untuk input select gunakan id -->
+                            <select class="form-select" name="agama" id="agama">
+                                <option value="">Pilih agama</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Konghucu">Konghucu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label>Foto</label>
+                        <input type="file" class="form-control" name="foto" />
+                    </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                    <input type="submit" class="btn btn-primary" value="Simpan Data">
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    var genderValue = "<?= $data->jenis_kelamin; ?>";
+    var genderOption = document.querySelector("#gender option[value='" + genderValue + "']");
+    genderOption.selected = true;
+
+    var agamaValue = "<?= $data->agama; ?>";
+    var agamaOption = document.querySelector("#agama option[value='" + agamaValue + "']");
+    agamaOption.selected = true;
+</script>

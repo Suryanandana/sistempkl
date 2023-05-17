@@ -7,6 +7,7 @@ class Cpkampus extends CI_Controller
 	public function __construct()
     {
         parent::__construct();
+        $this->load->model('mpkampus');
         $this->load->model('mvalidasi');
         $this->mvalidasi->validasiPkampus();
     }
@@ -19,7 +20,42 @@ class Cpkampus extends CI_Controller
 
     public function profile() 
     {
-        $data['content'] = $this->load->view('pkampus/profile', [], true);
+        $nip = $this->session->userdata('username');
+        $login['data'] = $this->mpkampus->pkampusLogin($nip);
+        $data['content'] = $this->load->view('pkampus/profile', $login, true);
         $this->load->view('pkampus/main', $data);
+    }
+
+    public function simpanProfile()
+    {
+        $nip = $this->session->userdata('username');
+        $login['data'] = $this->mpkampus->fotopKampus($nip);
+        $fotoLama = $login['data'][0]->foto;
+
+        $this->load->helper(['form', 'url']);
+        $config['upload_path'] = './resource/img/fotoPembimbingKampus';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 2000;
+        $this->load->library('upload', $config);
+
+        if($this->upload->do_upload('foto'))
+        {
+            $dataImg = $this->upload->data();
+            $_POST['foto'] = $dataImg['file_name'];
+
+            if(isset($fotoLama)){
+                unlink('./resource/img/fotoPembimbingKampus/'.$fotoLama);
+            }
+
+        } 
+        else 
+        { 
+            var_dump($this->upload->display_errors());
+        }
+        
+        $this->load->model('mpkampus');
+        $this->mpkampus->simpanProfile($_POST);
+        // tampilkan halaman profile mhs
+        redirect('cpkampus/profile');
     }
 }

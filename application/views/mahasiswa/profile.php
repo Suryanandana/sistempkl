@@ -266,17 +266,17 @@
 
 <!-- javascript untuk memilih option secara langsung saat edit profile -->
 <script>
-// ambil jenis_kelamin pada database lalu masukkan ke variabel genderValue
-var genderValue = "<?= $data->jenis_kelamin; ?>";
-// ambil option yang sesuai dengan data pada database (#gender diambil dari id select pada pop up)
-var genderOption = document.querySelector("#gender option[value='" + genderValue + "']");
-// pilih gender tersebut secara otomatis
-genderOption.selected = true;
+    // ambil jenis_kelamin pada database lalu masukkan ke variabel genderValue
+    var genderValue = "<?= $data->jenis_kelamin; ?>";
+    // ambil option yang sesuai dengan data pada database (#gender diambil dari id select pada pop up)
+    var genderOption = document.querySelector("#gender option[value='" + genderValue + "']");
+    // pilih gender tersebut secara otomatis
+    genderOption.selected = true;
 
-// ambil agama pada database lalu masukkan ke variabel genderValue
-var agamaValue = "<?= $data->agama; ?>";
-// ambil option yang sesuai dengan data pada database
-var agamaOption = document.querySelector("#agama option[value='" + agamaValue + "']");
-// pilih agama tersebut secara otomatis
-agamaOption.selected = true;
+    // ambil agama pada database lalu masukkan ke variabel genderValue
+    var agamaValue = "<?= $data->agama; ?>";
+    // ambil option yang sesuai dengan data pada database
+    var agamaOption = document.querySelector("#agama option[value='" + agamaValue + "']");
+    // pilih agama tersebut secara otomatis
+    agamaOption.selected = true;
 </script>
