@@ -5,6 +5,8 @@ application/cache/*
 
 resource/fontawesome
 resource/img/fotoMahasiswa
+resource/img/fotoPembimbingIndustri
+resource/img/fotoPembimbingKampus
 
 .vscode/
 
