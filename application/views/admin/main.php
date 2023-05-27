@@ -46,7 +46,7 @@
                                 <i class="bi bi-collection-fill"></i>
                                 <span>Master Data</span>
                             </a>
-                            <ul class="submenu ">
+                            <ul class="submenu jdaod">
                                 <li class="submenu-item ">
                                     <a href="extra-component-avatar.html">Mahasiswa</a>
                                 </li>
