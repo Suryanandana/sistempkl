@@ -54,7 +54,7 @@
                                     <a href="extra-component-sweetalert.html">Pembimbing Kampus</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-toastify.html">Pembimbing Industri</a>
+                                    <a href="<?= base_url('cadmin/tampilpembimbingindustri') ?>">Pembimbing Industri</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="<?= base_url('cadmin/tampilindustri') ?>">Industri</a>
