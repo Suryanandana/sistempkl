@@ -10,7 +10,7 @@ class Mlogin extends CI_Model
 		$query = $this->db->select('*')->from('login')
 			->where('username', $username)->where('password', $password)
 			->get();
-		if ($query) {
+		if ($query->num_rows() > 0) {
 			//ada data	
 			$data = $query->row();
 			// buat session
