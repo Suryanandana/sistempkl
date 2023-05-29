@@ -50,18 +50,18 @@ class Cmahasiswa extends CI_Controller
         // load library upload dengan konfigurasi yang ada
         $this->load->library('upload', $config);
         // jika upload gambar berhasil
-        if($this->upload->do_upload('foto')){
+        if ($this->upload->do_upload('foto')) {
             $dataImg = $this->upload->data();
             // masukkan nama foto untuk dikirim ke model
             $_POST['foto'] = $dataImg['file_name'];
             // lakukan pengecekan lagi jika sudah pernah mengisi foto maka hapus yang lama
-            if(isset($fotoLama)){
-                unlink('./resource/img/fotoMahasiswa/'.$fotoLama);
+            if (isset($fotoLama)) {
+                unlink('./resource/img/fotoMahasiswa/' . $fotoLama);
             }
         } else { // jika gagal
             var_dump($this->upload->display_errors());
         }
-        
+
         // simpan data
         $this->load->model('mmahasiswa');
         $this->mmahasiswa->simpanprofile($_POST);

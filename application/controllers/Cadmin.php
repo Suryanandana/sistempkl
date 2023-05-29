@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+require 'vendor/autoload.php';
+
 class Cadmin extends CI_Controller
 {
     public function __construct()
@@ -126,6 +130,190 @@ class Cadmin extends CI_Controller
         );
         $this->madmin->editindustri($id, $data);
     }
+
+    // import master
+    public function uploadData()
+    {
+        // load helper
+        $this->load->helper(['form', 'url']);
+        // konfigurasi format gambar
+        $config['upload_path'] = './resource/import/';
+        $config['allowed_types'] = 'xls|xlsx';
+        $config['max_size'] = 1000000;
+        // load library upload dengan konfigurasi yang ada
+        $this->load->library('upload', $config);
+        // jika upload gambar berhasil
+        if ($this->upload->do_upload('import')) {
+            $fileImport = $this->upload->data();
+            $fullPath = $fileImport['full_path'];
+            $this->importData($fullPath);
+        } else { // jika gagal
+            var_dump($this->upload->display_errors());
+        }
+    }
+
+    public function importData($file)
+    {
+        $spreadsheet = IOFactory::load($file);
+        $sheet = $spreadsheet->getActiveSheet();
+        $highestRow = $sheet->getHighestRow();
+        $data = $sheet->rangeToArray('A2:J' . $highestRow);
+        // ambil tiap barisnya menjadi array
+        $import = array();
+        foreach ($data as $baris) {
+            $temp = [
+                "nim" => $baris[0],
+                "nama_lengkap" => $baris[1],
+                "jurusan" => $baris[2],
+                "prodi" => $baris[3],
+                "tahun_masuk" => $baris[4],
+                "jenis_kelamin" => $baris[5],
+                "tempat_lahir" => $baris[6],
+                "tanggal_lahir" => $baris[7],
+                "alamat" => $baris[8],
+                "agama" => $baris[9],
+            ];
+            array_push($import, $temp);
+        }
+        unlink($file);
+        $this->madmin->importData($import);
+    }
+
+    // CRUD master mahasiswa
+    public function tampilMaster()
+    {
+        $url = base_url('cadmin/tampilMaster');
+        $pencarian = $this->pencarianData();
+        $jumlahMaster = $this->madmin->totalMaster($pencarian);
+        $dataPerPage = 5;
+        // jalankan konfigurasi pagination
+        $this->konfigPagination($url, $jumlahMaster, $dataPerPage);
+        $mulai = $this->getPage($dataPerPage);
+        // panggil method tampilMaster pada model
+        $data["data"] = $this->madmin->tampilMaster($dataPerPage, $mulai, $pencarian);
+        $data["links"] = $this->pagination->create_links();
+        // untuk menentukan penomeran pada view
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        // load view (sesuaikan)
+        $master['content'] = $this->load->view('admin/master', $data, true);
+        $this->load->view('admin/main', $master);
+    }
+
+    public function tambahMaster()
+    {
+        // simpan data yang dikirim lewat form kedalam variabel $data
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'jurusan' => $this->input->post('jurusan'),
+            'prodi' => $this->input->post('prodi'),
+            'tahun_masuk' => $this->input->post('tahun_masuk'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama')
+        );
+        $this->madmin->tambahMaster($data);
+    }
+
+    public function hapusMaster()
+    {
+        $id = $this->input->post('nim');
+        $this->madmin->hapusMaster($id);
+    }
+
+    public function editMaster()
+    {
+        // ambil id industri
+        $id = $this->input->post('nim');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'jurusan' => $this->input->post('jurusan'),
+            'prodi' => $this->input->post('prodi'),
+            'tahun_masuk' => $this->input->post('tahun_masuk'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama')
+        );
+        $this->madmin->editmaster($id, $data);
+    }
+
+
+    //crud pembimbing kampus
+    public function tampilPembimbingIndustri()
+    {
+        // isi sesuai nama class / nama method
+        $url = base_url('cadmin/tampilpembimbingindustri');
+        // berfungsi untuk mendapatkan pencarian yang diisi lewat form (gk perlu diubah)
+        $pencarian = $this->pencarianData();
+        // panggil method totalIndustri (sesuaikan), beserta variabel pencarian untuk mengetahui jumlah datanya
+        $jumlahPembimbingIndustri = $this->madmin->totalPembimbingIndustri($pencarian);
+        /* sesuaikan mau tampilkan berapa data per halamannya, untuk percobaan isi 1 atau 2 biar gk bnyk.
+            kalau udh berhasil baru sesuaiin lagi isi 5 biar sama */
+        $dataPerPage = 5;
+        // jalankan konfigurasi pagination (gk perlu diubah)
+        $this->konfigPagination($url, $jumlahPembimbingIndustri, $dataPerPage);
+        // untuk mengetahui sekarang lagi ada di page berapa, untuk menentukan limit data (gk perlu diubah)
+        $mulai = $this->getPage($dataPerPage);
+        // panggil method tampilDataIndustri pada model untuk menjalankan limit (sesuikan nama method)
+        $data["data"] = $this->madmin->tampilDataPembimbingIndustri($dataPerPage, $mulai, $pencarian);
+        // membuat link pagination pada view nantinya (gk perlu diubah)
+        $data["links"] = $this->pagination->create_links();
+        // untuk menentukan penomeran pada view (keduanya gk perlu diubah)
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        // load view (sesuaikan)
+        $pembimbingindustri['content'] = $this->load->view('admin/pembimbingindustri', $data, true);
+        $this->load->view('admin/main', $pembimbingindustri);
+    }
+
+    public function tambahPembimbingIndustri()
+    {
+        // simpan data yang dikirim lewat form kedalam variabel $data
+        $data = array(
+            'email' => $this->input->post('email'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'jabatan' => $this->input->post('jabatan'),
+            'no_hp' => $this->input->post('no_hp'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama'),
+            'foto' => $this->input->post('foto')
+        );
+        $this->madmin->tambahpembimbingindustri($data);
+    }
+
+    public function hapusPembimbingIndustri()
+    {
+        $id = $this->input->post('id_pembimbing_industri');
+        $this->madmin->hapuspembimbingindustri($id);
+    }
+
+    public function editPembimbingIndustri()
+    {
+        // ambil id industri
+        $id = $this->input->post('id_pembimbing_industri');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'email' => $this->input->post('email'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'jabatan' => $this->input->post('jabatan'),
+            'no_hp' => $this->input->post('no_hp'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama'),
+            'foto' => $this->input->post('foto')
+        );
+        $this->madmin->editpembimbingindustri($id, $data);
+    }
+
 
     public function tampilPkampus()
     {
