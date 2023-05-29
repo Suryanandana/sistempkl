@@ -173,4 +173,56 @@ class Madmin extends CI_Model
 		}
 		redirect('cadmin/tampilPembimbingIndustri');
 	}
+
+	public function tampilDataPkampus($batas, $page, $cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$this->db->limit($batas, $page);
+		$query = $this->db->get('pembimbing_kampus');
+		return $query->result();
+	}
+
+	public function totalPkampus($cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$query = $this->db->get('pembimbing_kampus');
+		return $query->num_rows();
+	}
+
+	public function tambahPkampus($data)
+	{
+		// tulis nama tabel dan data yang dikirim lewat form
+		$this->db->insert('pembimbing_kampus', $data);
+		// cek jika data berhasil disimpan atau jika gagal buatkan pesan
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Tambah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Tambah Data!");
+		}
+		redirect('cadmin/tampilPkampus');
+	}
+
+	public function hapusPkampus($id)
+	{
+		$this->db->where('nip', $id);
+		$this->db->delete('pembimbing_kampus');
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
+		}
+		redirect('cadmin/tampilPkampus');
+	}
+
+	public function editPkampus($id, $data)
+	{
+		$this->db->where('nip', $id);
+		$this->db->update('pembimbing_kampus', $data);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Ubah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Ubah Data!");
+		}
+		redirect('cadmin/tampilPkampus');
+	}
 }
