@@ -52,4 +52,71 @@ class Madmin extends CI_Model
 		}
 		redirect('cadmin/tampilIndustri');
 	}
+
+	// CRUD Master Mahasiswa
+	public function tampilMaster($batas, $page, $cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$this->db->limit($batas, $page);
+		$query = $this->db->get('master_mahasiswa');
+		return $query->result();
+	}
+
+	public function totalMaster($cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$query = $this->db->get('master_mahasiswa');
+		return $query->num_rows();
+	}
+
+	public function importData($import)
+	{
+		$this->db->trans_begin();
+		$this->db->insert_batch("master_mahasiswa", $import);
+		if ($this->db->trans_status() === FALSE) {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Import Data!");
+			$this->db->trans_rollback();
+		} else {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Import Data!");
+			$this->db->trans_commit();
+		}
+		redirect('cadmin/tampilMaster');
+	}
+
+	public function tambahMaster($data)
+	{
+		// tulis nama tabel dan data yang dikirim lewat form
+		$this->db->insert('master_mahasiswa', $data);
+		// cek jika data berhasil disimpan atau jika gagal buatkan pesan
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Tambah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Tambah Data!");
+		}
+		redirect('cadmin/tampilMaster');
+	}
+
+	public function hapusMaster($id)
+	{
+		$this->db->where('nim', $id);
+		$this->db->delete('master_mahasiswa');
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
+		}
+		redirect('cadmin/tampilMaster');
+	}
+
+	public function editMaster($id, $data)
+	{
+		$this->db->where('nim', $id);
+		$this->db->update('master_mahasiswa', $data);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Ubah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Ubah Data!");
+		}
+		redirect('cadmin/tampilMaster');
+	}
 }
