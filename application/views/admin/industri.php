@@ -35,7 +35,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="chart-profile-visit">
+                        <div class="table-responsive" id="chart-profile-visit">
                             <table class="table">
                                 <thead>
                                     <tr>
