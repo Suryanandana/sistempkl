@@ -53,6 +53,58 @@ class Madmin extends CI_Model
 		redirect('cadmin/tampilIndustri');
 	}
 
+	public function tampildatamahasiswa($batas, $page, $cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$this->db->limit($batas, $page);
+		$query = $this->db->get('mahasiswa');
+		return $query->result();
+	}
+
+	public function totalmahasiswa($cari = "")
+	{
+		$this->db->like('nama_lengkap', $cari);
+		$query = $this->db->get('mahasiswa');
+		return $query->num_rows();
+	}
+
+	public function tambahmahasiswa($data)
+	{
+		// tulis nama tabel dan data yang dikirim lewat form
+		$this->db->insert('mahasiswa', $data);
+		// cek jika data berhasil disimpan atau jika gagal buatkan pesan
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Tambah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Tambah Data!");
+		}
+		redirect('cadmin/tampilmahasiswa');
+	}
+
+	public function hapusmahasiswa($id)
+	{
+		$this->db->where('nim', $id);
+		$this->db->delete('mahasiswa');
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
+		}
+		redirect('cadmin/tampimahasiswa');
+	}
+
+	public function editmahasiswa($id, $data)
+	{
+		$this->db->where('nim', $id);
+		$this->db->update('mahasiswa', $data);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Ubah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Ubah Data!");
+		}
+		redirect('cadmin/tampilmahasiswa');
+	}
+
 	// CRUD Master Mahasiswa
 	public function tampilMaster($batas, $page, $cari = "")
 	{
