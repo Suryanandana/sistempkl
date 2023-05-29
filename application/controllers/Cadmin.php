@@ -145,12 +145,8 @@ class Cadmin extends CI_Controller
         // jika upload gambar berhasil
         if ($this->upload->do_upload('import')) {
             $fileImport = $this->upload->data();
-            $fileName = $fileImport['file_name'];
             $fullPath = $fileImport['full_path'];
             $this->importData($fullPath);
-            if (file_exists('./resource/import/' . $fileName)) {
-                unlink('./resource/import/' . $fileName);
-            }
         } else { // jika gagal
             var_dump($this->upload->display_errors());
         }
@@ -179,6 +175,7 @@ class Cadmin extends CI_Controller
             ];
             array_push($import, $temp);
         }
+        unlink($file);
         $this->madmin->importData($import);
     }
 
