@@ -41,7 +41,7 @@
                                     <tr>
                                         <th>no</th>
                                         <th>nim</th>
-                                        <th>email</th>
+                                        <th>Email</th>
                                         <th>Nama Lengkap</th>
                                         <th>Kelas</th>
                                         <th>No. HP</th>
@@ -135,7 +135,7 @@
                     <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
                     <label for="tambah-nama">NIM</label>
                     <input type="text" id="tambah-NIM" name="nim" class="form-control">
-                    <label for="tambah-nama">email</label>
+                    <label for="tambah-nama">Email</label>
                     <input type="text" id="tambah-email" name="email" class="form-control">
                     <label for="tambah-nama">Nama Lengkap</label>
                     <input type="text" id="tambah-nama_lengap" name="nama_lengkap" class="form-control">
@@ -157,7 +157,15 @@
                     <label for="tambah-nama">Alamat</label>
                     <input type="text" id="tambah-alamat" name="alamat" class="form-control">
                     <label for="tambah-nama">Agama</label>
-                    <input type="text" id="tambah-agama" name="agama" class="form-control">
+                    <select class="form-select" name="agama" id="tambah-agama">
+                                <option value="">Agama</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Budha">BUdha</option>
+                                <option value="Konghucu">Konghucu</option>
+                     </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -183,7 +191,7 @@
                     <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
                     <label for="hapus-nim">NIM</label>
                     <input type="text" id="hapus-nimMhs" name="nim" class="form-control">
-                    <label for="hapus-email">email</label>
+                    <label for="hapus-email">Email</label>
                     <input type="text" id="hapus-email" name="email" class="form-control">
                     <label for="hapus-nama_lengkap">Nama Lengkap</label>
                     <input type="text" id="hapus-nama_lengkap" name="nama_lengkap" class="form-control">
@@ -225,7 +233,7 @@
                     <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
                     <label for="edit-nim">NIM</label>
                     <input type="text" id="edit-nimMhs" name="nim" class="form-control">
-                    <label for="edit-email">email</label>
+                    <label for="edit-email">Email</label>
                     <input type="text" id="edit-email" name="email" class="form-control">
                     <label for="edit-nama_lengkap">Nama Lengkap</label>
                     <input type="text" id="edit-nama_lengkap" name="nama_lengkap" class="form-control">
@@ -246,7 +254,15 @@
                     <label for="edit-alamat">Alamat</label>
                     <input type="text" id="edit-alamat" name="alamat" class="form-control">
                     <label for="edit-agama">Agama</label>
-                    <input type="text" id="edit-agama" name="agama" class="form-control">
+                    <select class="form-select" name="agama" id="tambah-agama">
+                                <option value="">Agama</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Budha">BUdha</option>
+                                <option value="Konghucu">Konghucu</option>
+                     </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
