@@ -35,7 +35,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="chart-profile-visit">
+                        <div class="table-responsive" id="chart-profile-visit">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -91,7 +91,8 @@
                                                 <?= $row->agama ?>
                                             </td>
                                             <td>
-                                                <?= $row->foto ?>
+                                                 <img alt="Pic" width="20" style="object-fit: cover;"
+                                                    src="<?= (isset($row->foto)) ? base_url('resource/img/fotoMahasiswa/'.$row->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                                             </td>
                                             <th>
                                                 <!-- untuk argumen ke2 pada function hapus&edit sesuaikan dengan primary key tabel -->
@@ -143,17 +144,20 @@
                     <label for="tambah-nama">NO. HP</label>
                     <input type="text" id="tambah-no_hp" name="bo_hp" class="form-control">
                     <label for="tambah-nama">Jenis Kelamin</label>
+                    <select class="form-select" name="jenis_kelamin" id="tambah-jenis_kelamin">
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                     </select>
                     <input type="text" id="tambah-jenis_kelamin" name="jenis_kelamin" class="form-control">
                     <label for="tambah-nama">Tempat Lahir</label>
                     <input type="text" id="tambah-tempat_lahir" name="tempat_lahir" class="form-control">
                     <label for="tambah-alamat">Tanggal Lahir</label>
-                    <input type="text" id="tambah-tanggal_lahir" name="tanggal_lahir" class="form-control">
+                    <input type="date" id="tambah-tanggal_lahir" name="tanggal_lahir" class="form-control">
                     <label for="tambah-nama">Alamat</label>
                     <input type="text" id="tambah-alamat" name="alamat" class="form-control">
                     <label for="tambah-nama">Agama</label>
                     <input type="text" id="tambah-agama" name="agama" class="form-control">
-                    <label for="tambah-telp">foto</label>
-                    <input type="text" id="tambah-foto" name="foto" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -197,12 +201,52 @@
                     <input type="text" id="hapus-alamat" name="alamat" class="form-control">
                     <label for="hapus-agama">Agama</label>
                     <input type="text" id="hapus-agama" name="agama" class="form-control">
-                    <label for="hapus-foto">foto</label>
-                    <input type="text" id="hapus-foto" name="foto" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <input type="submit" class="btn btn-danger" value="Hapus Data">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Edit Data</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?= base_url('cadmin/editmahasiswa') ?>" method="post">
+                <div class="modal-body">
+                    <!-- sesuaikan name dengan primary key pada tabel -->
+                    <input type="hidden" id="edit-nim" name="id_nim">
+                    <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
+                    <label for="edit-nim">NIM</label>
+                    <input type="text" id="edit-nimMhs" name="nim" class="form-control">
+                    <label for="edit-email">email</label>
+                    <input type="text" id="edit-email" name="email" class="form-control">
+                    <label for="edit-nama_lengkap">Nama Lengkap</label>
+                    <input type="text" id="edit-nama_lengkap" name="nama_lengkap" class="form-control">
+                    <label for="edit-kelas">kelas</label>
+                    <input type="text" id="edit-kelas" name="kelas" class="form-control">
+                    <label for="edit-no_hp">NO. HP</label>
+                    <input type="text" id="edit-no_hp" name="no_hp" class="form-control">
+                    <label for="edit-jenis_kelamin">Jenis Kelamin</label>
+                    <input type="text" id="edit-jenis_kelamin" name="jenis_kelamin" class="form-control">
+                    <label for="edit-tempat_lahir">Tempat Lahir</label>
+                    <input type="text" id="edit-tempat_lahir" name="tempat_lahir" class="form-control">
+                    <label for="edit-tanggal_lahir">Tanggal Lahir</label>
+                    <input type="text" id="edit-tanggal_lahir" name="tanggal_lahir" class="form-control">
+                    <label for="edit-alamat">Alamat</label>
+                    <input type="text" id="edit-alamat" name="alamat" class="form-control">
+                    <label for="edit-agama">Agama</label>
+                    <input type="text" id="edit-agama" name="agama" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <input type="submit" class="btn btn-warning" value="Edit Data">
                 </div>
             </form>
         </div>
@@ -248,11 +292,17 @@
     function edit(baris, id) {
         // fungsinya sama seperti hapus hanya beda penamaan
         const td = document.querySelectorAll('#' + baris + ' td');
-
-        document.getElementById('edit-nama').value = td[0].innerText
-        document.getElementById('edit-alamat').value = td[1].innerText
-        document.getElementById('edit-telp').value = td[2].innerText
-
-        document.getElementById('edit-id_industri').value = id;
+        document.getElementById('edit-nimMhs').value = td[0].innerText
+        document.getElementById('edit-email').value = td[1].innerText
+        document.getElementById('edit-nama_lengkap').value = td[2].innerText
+        document.getElementById('edit-kelas').value = td[3].innerText
+        document.getElementById('edit-no_hp').value = td[4].innerText
+        document.getElementById('edit-jenis_kelamin').value = td[5].innerText
+        document.getElementById('edit-tempat_lahir').value = td[6].innerText
+        document.getElementById('edit-tanggal_lahir').value = td[7].innerText
+        document.getElementById('edit-alamat').value = td[8].innerText
+        document.getElementById('edit-agama').value = td[9].innerText
+        // isi input id_industri dengan parameter id untuk menghapus baris
+        document.getElementById('edit-nim').value = id;
     }
 </script>
