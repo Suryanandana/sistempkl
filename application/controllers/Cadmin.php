@@ -224,6 +224,7 @@ class Cadmin extends CI_Controller
         $sheet = $spreadsheet->getActiveSheet();
         $highestRow = $sheet->getHighestRow();
         $data = $sheet->rangeToArray('A2:J' . $highestRow);
+        unlink($file);
         // ambil tiap barisnya menjadi array
         $import = array();
         foreach ($data as $baris) {
@@ -241,7 +242,6 @@ class Cadmin extends CI_Controller
             ];
             array_push($import, $temp);
         }
-        unlink($file);
         $this->madmin->importData($import);
     }
 
