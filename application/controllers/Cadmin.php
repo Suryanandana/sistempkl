@@ -141,7 +141,7 @@ class Cadmin extends CI_Controller
 
         $jumlahmahasiswa = $this->madmin->totalmahasiswa($pencarian);
 
-        $dataPerPage = 2;
+        $dataPerPage = 5;
         $this->konfigPagination($url, $jumlahmahasiswa, $dataPerPage);
         $mulai = $this->getPage($dataPerPage);
         $data["data"] = $this->madmin->tampildatamahasiswa($dataPerPage, $mulai, $pencarian);
@@ -162,13 +162,13 @@ class Cadmin extends CI_Controller
             'kelas' => $this->input->post('kelas'),
             'no_hp' => $this->input->post('no_hp'),
             'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-            'tempat_lahir' => $this->input->post('tempat lahir'),
-            'tanggal lahir' => $this->input->post('tanggal lahir'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
             'alamat' => $this->input->post('alamat'),
             'agama' => $this->input->post('agama'),
             'foto' => $this->input->post('foto'),
         );
-        $this->madmin->tambahindustri($data);
+        $this->madmin->tambahmahasiswa($data);
     }
 
     public function hapusmahasiswa()
@@ -188,13 +188,13 @@ class Cadmin extends CI_Controller
             'kelas' => $this->input->post('kelas'),
             'no_hp' => $this->input->post('no_hp'),
             'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-            'tempat_lahir' => $this->input->post('tempat lahir'),
-            'tanggal lahir' => $this->input->post('tanggal lahir'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
             'alamat' => $this->input->post('alamat'),
             'agama' => $this->input->post('agama'),
             'foto' => $this->input->post('foto'),
         );
-        $this->madmin->editindustri($id, $data);
+        $this->madmin->editmahasiswa($id, $data);
     }
 
     // import master

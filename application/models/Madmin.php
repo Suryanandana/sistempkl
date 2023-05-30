@@ -90,7 +90,7 @@ class Madmin extends CI_Model
 		} else {
 			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
 		}
-		redirect('cadmin/tampimahasiswa');
+		redirect('cadmin/tampilmahasiswa');
 	}
 
 	public function editmahasiswa($id, $data)
