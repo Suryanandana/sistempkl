@@ -149,7 +149,7 @@
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                      </select>
-                    <input type="text" id="tambah-jenis_kelamin" name="jenis_kelamin" class="form-control">
+                   
                     <label for="tambah-nama">Tempat Lahir</label>
                     <input type="text" id="tambah-tempat_lahir" name="tempat_lahir" class="form-control">
                     <label for="tambah-alamat">Tanggal Lahir</label>
@@ -196,7 +196,7 @@
                     <label for="hapus-tempat_lahir">Tempat Lahir</label>
                     <input type="text" id="hapus-tempat_lahir" name="tempat_lahir" class="form-control">
                     <label for="hapus-tanggal_lahir">Tanggal Lahir</label>
-                    <input type="text" id="hapus-tanggal_lahir" name="tanggal_lahir" class="form-control">
+                    <input type="date" id="hapus-tanggal_lahir" name="tanggal_lahir" class="form-control">
                     <label for="hapus-alamat">Alamat</label>
                     <input type="text" id="hapus-alamat" name="alamat" class="form-control">
                     <label for="hapus-agama">Agama</label>
@@ -234,11 +234,15 @@
                     <label for="edit-no_hp">NO. HP</label>
                     <input type="text" id="edit-no_hp" name="no_hp" class="form-control">
                     <label for="edit-jenis_kelamin">Jenis Kelamin</label>
-                    <input type="text" id="edit-jenis_kelamin" name="jenis_kelamin" class="form-control">
+                    <select class="form-select" name="jenis_kelamin" id="tambah-jenis_kelamin">
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                     </select>
                     <label for="edit-tempat_lahir">Tempat Lahir</label>
                     <input type="text" id="edit-tempat_lahir" name="tempat_lahir" class="form-control">
                     <label for="edit-tanggal_lahir">Tanggal Lahir</label>
-                    <input type="text" id="edit-tanggal_lahir" name="tanggal_lahir" class="form-control">
+                    <input type="date" id="edit-tanggal_lahir" name="tanggal_lahir" class="form-control">
                     <label for="edit-alamat">Alamat</label>
                     <input type="text" id="edit-alamat" name="alamat" class="form-control">
                     <label for="edit-agama">Agama</label>
