@@ -1,5 +1,5 @@
 <div class="page-heading">
-    <h3>Data Industri</h3>
+    <h3>Data Master Mahasiswa</h3>
 </div>
 <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambah-modal">
     Tambah Data
@@ -23,7 +23,7 @@
                         <div class="row justify-content-end">
                             <div class="col-4">
                                 <!-- fitur pencarian (cukup ubah link actionnya aja) -->
-                                <form action="<?= base_url('cadmin/tampilindustri') ?>" method="get">
+                                <form action="<?= base_url('cadmin/tampilmaster') ?>" method="get">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <i class="bi bi-search"></i>
@@ -122,7 +122,7 @@
 
 <!-- Pop up Tambah Data -->
 <div class="modal fade" id="tambah-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Tambah Data</h1>
@@ -130,38 +130,38 @@
             </div>
             <form action="<?= base_url('cadmin/tambahmaster') ?>" method="POST">
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="row row-cols-2">
+                        <div class="col">
                             <label for="nim">NIM</label>
                             <input type="text" id="nim" name="nim" class="form-control">
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="nama">Nama Lengkap</label>
                             <input type="text" id="nama" name="nama_lengkap" class="form-control">
                         </div>
-                        <div class="col-6"><label for="jurusan">Jurusan</label>
+                        <div class="col"><label for="jurusan">Jurusan</label>
                             <input type="text" id="jurusan" name="jurusan" class="form-control">
                         </div>
-                        <div class="col-6"><label for="prodi">Prodi</label>
+                        <div class="col"><label for="prodi">Prodi</label>
                             <input type="text" id="prodi" name="prodi" class="form-control">
                         </div>
-                        <div class="col-6"><label for="tahun">Tahun Masuk</label>
+                        <div class="col"><label for="tahun">Tahun Masuk</label>
                             <input type="text" id="tahun" name="tahun_masuk" class="form-control">
                         </div>
-                        <div class="col-6"><label for="jenkel">Jenis Kelamin</label>
+                        <div class="col"><label for="jenkel">Jenis Kelamin</label>
                             <input type="text" id="jenkel" name="jenis_kelamin" class="form-control">
                         </div>
-                        <div class="col-6"><label for="tempat">Tempat Lahir</label>
+                        <div class="col"><label for="tempat">Tempat Lahir</label>
                             <input type="text" id="tempat" name="tempat_lahir" class="form-control">
                         </div>
-                        <div class="col-6"><label for="tanggal">Tanggal Lahir</label>
+                        <div class="col"><label for="tanggal">Tanggal Lahir</label>
                             <input type="date" id="tanggal" name="tanggal_lahir" class="form-control">
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="alamat">Alamat</label>
                             <input type="text" id="alamat" name="alamat" class="form-control">
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="agama">Agama</label>
                             <input type="text" id="agama" name="agama" class="form-control">
                         </div>
@@ -189,38 +189,38 @@
                     <!-- sesuaikan name dengan primary key pada tabel -->
                     <input type="hidden" id="hapus-id-nim" name="nim">
                     <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="row row-cols-2">
+                        <div class="col">
                             <label for="hapus-nim">NIM</label>
                             <input type="text" id="hapus-nim" name="id-nim" class="form-control" disabled>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="hapus-nama">Nama Lengkap</label>
                             <input type="text" id="hapus-nama" name="nama_lengkap" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-jurusan">Jurusan</label>
+                        <div class="col"><label for="hapus-jurusan">Jurusan</label>
                             <input type="text" id="hapus-jurusan" name="jurusan" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-prodi">Prodi</label>
+                        <div class="col"><label for="hapus-prodi">Prodi</label>
                             <input type="text" id="hapus-prodi" name="prodi" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-tahun">Tahun Masuk</label>
+                        <div class="col"><label for="hapus-tahun">Tahun Masuk</label>
                             <input type="text" id="hapus-tahun" name="tahun_masuk" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-jenkel">Jenis Kelamin</label>
+                        <div class="col"><label for="hapus-jenkel">Jenis Kelamin</label>
                             <input type="text" id="hapus-jenkel" name="jenis_kelamin" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-tempat">Tempat Lahir</label>
+                        <div class="col"><label for="hapus-tempat">Tempat Lahir</label>
                             <input type="text" id="hapus-tempat" name="tempat_lahir" class="form-control" disabled>
                         </div>
-                        <div class="col-6"><label for="hapus-tanggal">Tanggal Lahir</label>
+                        <div class="col"><label for="hapus-tanggal">Tanggal Lahir</label>
                             <input type="text" id="hapus-tanggal" name="tanggal_lahir" class="form-control" disabled>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="hapus-alamat">Alamat</label>
                             <input type="text" id="hapus-alamat" name="alamat" class="form-control" disabled>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="hapus-agama">Agama</label>
                             <input type="text" id="hapus-agama" name="agama" class="form-control" disabled>
                         </div>
@@ -246,38 +246,38 @@
             <form action="<?= base_url('cadmin/editmaster') ?>" method="post">
                 <input type="hidden" id="edit-id-nim" name="nim">
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="row row-cols-2">
+                        <div class="col">
                             <label for="edit-nim">NIM</label>
                             <input type="text" id="edit-nim" name="id-nim" class="form-control" disabled>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="edit-nama">Nama Lengkap</label>
                             <input type="text" id="edit-nama" name="nama_lengkap" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-jurusan">Jurusan</label>
+                        <div class="col"><label for="edit-jurusan">Jurusan</label>
                             <input type="text" id="edit-jurusan" name="jurusan" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-prodi">Prodi</label>
+                        <div class="col"><label for="edit-prodi">Prodi</label>
                             <input type="text" id="edit-prodi" name="prodi" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-tahun">Tahun Masuk</label>
+                        <div class="col"><label for="edit-tahun">Tahun Masuk</label>
                             <input type="text" id="edit-tahun" name="tahun_masuk" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-jenkel">Jenis Kelamin</label>
+                        <div class="col"><label for="edit-jenkel">Jenis Kelamin</label>
                             <input type="text" id="edit-jenkel" name="jenis_kelamin" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-tempat">Tempat Lahir</label>
+                        <div class="col"><label for="edit-tempat">Tempat Lahir</label>
                             <input type="text" id="edit-tempat" name="tempat_lahir" class="form-control">
                         </div>
-                        <div class="col-6"><label for="edit-tanggal">Tanggal Lahir</label>
+                        <div class="col"><label for="edit-tanggal">Tanggal Lahir</label>
                             <input type="text" id="edit-tanggal" name="tanggal_lahir" class="form-control">
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="edit-alamat">Alamat</label>
                             <input type="text" id="edit-alamat" name="alamat" class="form-control">
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="edit-agama">Agama</label>
                             <input type="text" id="edit-agama" name="agama" class="form-control">
                         </div>

@@ -51,7 +51,7 @@
                                     <a href="<?= base_url('cadmin/tampilMaster') ?>">Master Data Mahasiswa</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">Mahasiswa</a>
+                                    <a href="<?= base_url('cadmin/tampilmahasiswa') ?>">Mahasiswa</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="<?= base_url('cadmin/tampilpkampus') ?>">Pembimbing Kampus</a>

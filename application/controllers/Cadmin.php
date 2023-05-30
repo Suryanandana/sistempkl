@@ -131,6 +131,72 @@ class Cadmin extends CI_Controller
         $this->madmin->editindustri($id, $data);
     }
 
+
+    public function tampilmahasiswa()
+    {
+
+        $url = base_url('cadmin/tampilmahasiswa');
+
+        $pencarian = $this->pencarianData();
+
+        $jumlahmahasiswa = $this->madmin->totalmahasiswa($pencarian);
+
+        $dataPerPage = 2;
+        $this->konfigPagination($url, $jumlahmahasiswa, $dataPerPage);
+        $mulai = $this->getPage($dataPerPage);
+        $data["data"] = $this->madmin->tampildatamahasiswa($dataPerPage, $mulai, $pencarian);
+        $data["links"] = $this->pagination->create_links();
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        $industri['content'] = $this->load->view('admin/mdmahasiswa', $data, true);
+        $this->load->view('admin/main', $industri);
+    }
+
+    public function tambahmahasiswa()
+    {
+
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'email' => $this->input->post('email'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'kelas' => $this->input->post('kelas'),
+            'no_hp' => $this->input->post('no_hp'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat lahir'),
+            'tanggal lahir' => $this->input->post('tanggal lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama'),
+            'foto' => $this->input->post('foto'),
+        );
+        $this->madmin->tambahindustri($data);
+    }
+
+    public function hapusmahasiswa()
+    {
+        $id = $this->input->post('nim');
+        $this->madmin->hapusmahasiswa($id);
+    }
+
+    public function editmahasiswa()
+    {
+        $id = $this->input->post('nim');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'email' => $this->input->post('email'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'kelas' => $this->input->post('kelas'),
+            'no_hp' => $this->input->post('no_hp'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'tempat_lahir' => $this->input->post('tempat lahir'),
+            'tanggal lahir' => $this->input->post('tanggal lahir'),
+            'alamat' => $this->input->post('alamat'),
+            'agama' => $this->input->post('agama'),
+            'foto' => $this->input->post('foto'),
+        );
+        $this->madmin->editindustri($id, $data);
+    }
+
     // import master
     public function uploadData()
     {
@@ -158,6 +224,7 @@ class Cadmin extends CI_Controller
         $sheet = $spreadsheet->getActiveSheet();
         $highestRow = $sheet->getHighestRow();
         $data = $sheet->rangeToArray('A2:J' . $highestRow);
+        unlink($file);
         // ambil tiap barisnya menjadi array
         $import = array();
         foreach ($data as $baris) {
@@ -175,7 +242,6 @@ class Cadmin extends CI_Controller
             ];
             array_push($import, $temp);
         }
-        unlink($file);
         $this->madmin->importData($import);
     }
 

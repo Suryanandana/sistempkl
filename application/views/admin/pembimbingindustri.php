@@ -1,5 +1,5 @@
 <div class="page-heading">
-    <h3>Data Industri</h3>
+    <h3>Data Pembimbing Industri</h3>
 </div>
 <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambah-modal">
     Tambah Data
@@ -88,17 +88,20 @@
                                             </td>
                                             <td>
                                                 <img alt="Pic" style="object-fit: cover;"
-                                                src="<?= (isset($row->foto)) ? base_url('resource/img/fotoPembimbingIndustri/'.$row->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" width="20" />
+                                                    src="<?= (isset($row->foto)) ? base_url('resource/img/fotoPembimbingIndustri/' . $row->foto) : base_url('./resource/img/avatars/default.jpg'); ?>"
+                                                    width="20" />
                                             </td>
                                             <th>
                                                 <!-- untuk argumen ke2 pada function hapus&edit sesuaikan dengan primary key tabel -->
                                                 <!-- contohnya jika tabel mahasiswa maka isi $row->nim -->
-                                                <button onclick="hapus('baris<?= $no ?>', '<?= $row->id_pembimbing_industri ?>')"
+                                                <button
+                                                    onclick="hapus('baris<?= $no ?>', '<?= $row->id_pembimbing_industri ?>')"
                                                     class="btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#hapus-modal">
                                                     <i class="bi bi-trash3"></i>
                                                 </button>
-                                                <button onclick="edit('baris<?= $no ?>', '<?= $row->id_pembimbing_industri ?>')"
+                                                <button
+                                                    onclick="edit('baris<?= $no ?>', '<?= $row->id_pembimbing_industri ?>')"
                                                     class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#edit-modal">
                                                     <i class="bi bi-pencil-square"></i>
@@ -147,7 +150,7 @@
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                     </select>
-                    
+
                     <label for="tambah-tempat_lahir">Tempat Lahir</label>
                     <input type="text" id="tambah-tempat_lahir" name="tempat_lahir" class="form-control">
 
@@ -159,13 +162,13 @@
 
                     <label for="tambah-agama">Agama</label>
                     <select name="agama" id="tambah-agama" class="form-control">
-                    <option value="">Pilih agama</option>
-                            <option value="Hindu">Hindu</option>
-                            <option value="Islam">Islam</option>
-                            <option value="Katolik">Katolik</option>
-                            <option value="Protestan">Protestan</option>
-                            <option value="Budha">Budha</option>
-                            <option value="Konghucu">Konghucu</option>
+                        <option value="">Pilih agama</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Konghucu">Konghucu</option>
                     </select>
 
                     <label for="tambah-foto">Foto</label>
@@ -223,13 +226,13 @@
 
                     <label for="hapus-agama">Agama</label>
                     <select name="agama" id="hapus-agama" class="form-control">
-                    <option value="">Pilih agama</option>
-                            <option value="Hindu">Hindu</option>
-                            <option value="Islam">Islam</option>
-                            <option value="Katolik">Katolik</option>
-                            <option value="Protestan">Protestan</option>
-                            <option value="Budha">Budha</option>
-                            <option value="Konghucu">Konghucu</option>
+                        <option value="">Pilih agama</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Konghucu">Konghucu</option>
                     </select>
 
                     <label for="hapus-foto">Foto</label>
@@ -287,13 +290,13 @@
 
                     <label for="edit-agama">Agama</label>
                     <select name="agama" id="edit-agama" class="form-control">
-                    <option value="">Pilih agama</option>
-                            <option value="Hindu">Hindu</option>
-                            <option value="Islam">Islam</option>
-                            <option value="Katolik">Katolik</option>
-                            <option value="Protestan">Protestan</option>
-                            <option value="Budha">Budha</option>
-                            <option value="Konghucu">Konghucu</option>
+                        <option value="">Pilih agama</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Protestan">Protestan</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Konghucu">Konghucu</option>
                     </select>
 
                     <label for="edit-foto">Foto</label>
