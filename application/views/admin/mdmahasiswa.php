@@ -39,6 +39,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>no</th>
                                         <th>nim</th>
                                         <th>email</th>
                                         <th>Nama Lengkap</th>
@@ -59,6 +60,9 @@
                                             <th scope="row">
                                                 <?= $no ?>
                                             </th>
+                                            <td>
+                                                <?= $row->nim ?>
+                                            </td>
                                             <td>
                                                 <?= $row->email ?>
                                             </td>
@@ -160,6 +164,51 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="hapus-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Hapus Data</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?= base_url('cadmin/hapusmahasiswa') ?>" method="post">
+                <div class="modal-body">
+                    <!-- sesuaikan name dengan primary key pada tabel -->
+                    <input type="hidden" id="hapus-nim" name="nim">
+                    <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
+                    <label for="hapus-nim">NIM</label>
+                    <input type="text" id="hapus-nimMhs" name="nim" class="form-control">
+                    <label for="hapus-email">email</label>
+                    <input type="text" id="hapus-email" name="email" class="form-control">
+                    <label for="hapus-nama_lengkap">Nama Lengkap</label>
+                    <input type="text" id="hapus-nama_lengkap" name="nama_lengkap" class="form-control">
+                    <label for="hapus-kelas">kelas</label>
+                    <input type="text" id="hapus-kelas" name="kelas" class="form-control">
+                    <label for="hapus-no_hp">NO. HP</label>
+                    <input type="text" id="hapus-no_hp" name="no_hp" class="form-control">
+                    <label for="hapus-jenis_kelamin">Jenis Kelamin</label>
+                    <input type="text" id="hapus-jenis_kelamin" name="jenis_kelamin" class="form-control">
+                    <label for="hapus-tempat_lahir">Tempat Lahir</label>
+                    <input type="text" id="hapus-tempat_lahir" name="tempat_lahir" class="form-control">
+                    <label for="hapus-tanggal_lahir">Tanggal Lahir</label>
+                    <input type="text" id="hapus-tanggal_lahir" name="tanggal_lahir" class="form-control">
+                    <label for="hapus-alamat">Alamat</label>
+                    <input type="text" id="hapus-alamat" name="alamat" class="form-control">
+                    <label for="hapus-agama">Agama</label>
+                    <input type="text" id="hapus-agama" name="agama" class="form-control">
+                    <label for="hapus-foto">foto</label>
+                    <input type="text" id="hapus-foto" name="foto" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <input type="submit" class="btn btn-danger" value="Hapus Data">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
     <script src="<?= base_url('/resource/vendors/perfect-scrollbar/perfect-scrollbar.min.js'); ?>"></script>
     <script src="<?= base_url('/resource/js/bootstrap.min.js'); ?>"></script>
 
@@ -178,5 +227,32 @@
         }
     </script>
 </body>
+<script>
+    function hapus(baris, id) {
+        const td = document.querySelectorAll('#' + baris + ' td');
+        document.getElementById('hapus-nimMhs').value = td[0].innerText
+        document.getElementById('hapus-email').value = td[1].innerText
+        document.getElementById('hapus-nama_lengkap').value = td[2].innerText
+        document.getElementById('hapus-kelas').value = td[3].innerText
+        document.getElementById('hapus-no_hp').value = td[4].innerText
+        document.getElementById('hapus-jenis_kelamin').value = td[5].innerText
+        document.getElementById('hapus-tempat_lahir').value = td[6].innerText
+        document.getElementById('hapus-tanggal_lahir').value = td[7].innerText
+        document.getElementById('hapus-alamat').value = td[8].innerText
+        document.getElementById('hapus-agama').value = td[9].innerText
+        document.getElementById('hapus-foto').value = td[10].innerText
+        // isi input id_industri dengan parameter id untuk menghapus baris
+        document.getElementById('hapus-nim').value = id;
+    }
 
-</html>
+    function edit(baris, id) {
+        // fungsinya sama seperti hapus hanya beda penamaan
+        const td = document.querySelectorAll('#' + baris + ' td');
+
+        document.getElementById('edit-nama').value = td[0].innerText
+        document.getElementById('edit-alamat').value = td[1].innerText
+        document.getElementById('edit-telp').value = td[2].innerText
+
+        document.getElementById('edit-id_industri').value = id;
+    }
+</script>
