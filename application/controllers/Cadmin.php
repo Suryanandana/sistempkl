@@ -453,4 +453,58 @@ class Cadmin extends CI_Controller
         );
         $this->madmin->editPkampus($id, $data);
     }
+
+    // CRUD Upload Surat
+    public function Surat()
+    {
+        $dataPerPage = 5;
+        $mulai = $this->getPage($dataPerPage);
+        $data['no'] = $mulai + 1;
+        $data['data'] = $this->madmin->tampilSurat();
+        $surat['content'] = $this->load->view('admin/surat', $data, true);
+        $this->load->view('admin/main', $surat);
+    }
+
+    public function tambahSurat()
+    {
+
+        $jenis_surat = $this->input->post('jenis_surat');
+        $file = $_POST['dokumen'];
+
+        if($file = '')
+        {
+        
+        }
+        else
+        {
+            $config['upload_path']          = './resource/file';
+            $config['allowed_types']        = 'doc|docx|pdf';
+    
+            $this->load->library('upload', $config); 
+    
+            if ($this->upload->do_upload('dokumen')) 
+            {
+                $file = $this->upload->data('file_name');
+            } 
+            else 
+            {
+                var_dump($this->upload->display_errors());
+            }
+        }
+
+        $data = array(
+            'jenis_surat' => $jenis_surat,
+            'dokumen' => $file
+        );
+
+        $this->load->model('madmin');
+        $this->madmin->tambahSuratPengantarPKL($data);
+    }
+
+    public function hapusSurat()
+    {
+        $id = $this->input->post('jenis_surat');
+        $this->madmin->hapusSurat($id);
+    }
+
 }
