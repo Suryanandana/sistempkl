@@ -42,14 +42,11 @@
                                             <th>
                                                 <!-- untuk argumen ke2 pada function hapus&edit sesuaikan dengan primary key tabel -->
                                                 <!-- contohnya jika tabel mahasiswa maka isi $row->nim -->
-                                                <button
-                                                    onclick=""
-                                                    class="btn btn-warning" data-bs-toggle="modal"
+                                                <button onclick="" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#l">
                                                     <i class="bi bi-file-earmark-arrow-down"></i>
                                                 </button>
-                                                <button
-                                                    onclick="hapus('baris<?= $no ?>', '<?= $row->jenis_surat ?>')"
+                                                <button onclick="hapus('baris<?= $no ?>', '<?= $row->jenis_surat ?>')"
                                                     class="btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#hapus-modal">
                                                     <i class="bi bi-trash3"></i>
@@ -89,8 +86,6 @@
                                 <option selected>Pilih</option>
                                 <option value="surat pengajuan">Surat Pengajuan</option>
                                 <option value="surat pengantar">Surat Pengantar</option>
-                                <option value="surat resmi pkl">Surat Resmi PKL</option>
-                                <option value="surat bimbingan">Surat Bimbingan</option>
                             </select>
                         </div>
                     </div>

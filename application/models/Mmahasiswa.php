@@ -42,4 +42,50 @@ class Mmahasiswa extends CI_Model
             $this->session->set_flashdata('pesan_gagal', 'Data gagal disimpan!');
         }
     }
+
+    public function ambilDataSurat()
+    {
+        $query = $this->db->select('*')->from('data_surat')->get();
+        return $query->result();
+    }
+
+    public function ambilSurat($nim)
+    {
+        $query = $this->db->select('*')->from('surat')->where('nim', $nim)->get();
+        return $query->result();
+    }
+
+    public function suratMahasiswa($nim)
+    {
+        $this->db->select('dokumen');
+        $this->db->from('surat');
+        $this->db->where('nim', $nim);
+        // eksekusi query
+        $query = $this->db->get();
+        $data = $query->result();
+        // kembalikan data dokumen mahasiswa yang login
+        return $data;
+    }
+
+    public function dokumenLama($nim, $jenis_surat)
+    {
+        $this->db->select('*');
+        $this->db->from('surat');
+        $this->db->where('nim', $nim);
+        $this->db->where('jenis_surat', $jenis_surat);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function simpanDokumen($data)
+    {
+        $nim = $data['nim'];
+        $jenis_surat = $data['jenis_surat'];
+        $dokumenLama = $this->dokumenLama($nim, $jenis_surat);
+        if (isset($dokumenLama)) {
+            $this->db->delete('surat', ['nim' => $nim, 'jenis_surat' => $jenis_surat]);
+        }
+        $this->db->insert('surat', $data);
+        return $this->db->affected_rows();
+    }
 }

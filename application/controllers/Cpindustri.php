@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cpindustri extends CI_Controller
 {
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('mpindustri');
@@ -11,13 +11,13 @@ class Cpindustri extends CI_Controller
         $this->mvalidasi->validasiPindustri();
     }
 
-	public function index()
-	{
+    public function index()
+    {
         //mengirim view dashboard ke dalam variabel data ['conten']
-		$data['content'] = $this->load->view('pindustri/dashboard', [], true);	
+        $data['content'] = $this->load->view('pindustri/dashboard', [], true);
         //menampilkan view dashboard ke view admin
         $this->load->view('pindustri/main', $data);
-	}
+    }
 
     public function profile()
     {
@@ -40,24 +40,30 @@ class Cpindustri extends CI_Controller
         $config['max_size'] = 2000;
         $this->load->library('upload', $config);
 
-        if($this->upload->do_upload('foto'))
-        {
+        if ($this->upload->do_upload('foto')) {
             $dataImg = $this->upload->data();
             $_POST['foto'] = $dataImg['file_name'];
-            if(isset($fotoLama))
-            {
-                unlink('./resource/img/fotoPembimbingIndustri/'.$fotoLama);
+            if (isset($fotoLama)) {
+                unlink('./resource/img/fotoPembimbingIndustri/' . $fotoLama);
             }
-        } 
-        
-        else 
-        { 
+        } else {
             var_dump($this->upload->display_errors());
         }
-        
+
         // simpan data
         $this->load->model('mpindustri');
         $this->mpindustri->simpanProfile($_POST);
         redirect('cpindustri/profile');
+    }
+
+    public function tampilAktivitas()
+    {
+        $id_pembimbing_industri = $this->session->userdata('username');
+        $login['data'] = $this->mpindustri->pindustriLogin($id_pembimbing_industri);
+        $pMahasiswa = $this->mpindustri->dataBimbinganMahasiswa($id_pembimbing_industri);
+        var_dump($pMahasiswa);
+        die;
+        $data['content'] = $this->load->view('pindustri/profile', $login, true);
+        $this->load->view('pindustri/main', $data);
     }
 }

@@ -12,7 +12,7 @@
                         <a href="index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <li class="breadcrumb-item text-muted">Account</li>
-                    <li class="breadcrumb-item text-dark">Overview</li>
+                    <li class="breadcrumb-item text-dark">Profil</li>
                 </ul>
             </div>
             <div class="d-flex align-items-stretch flex-shrink-0">
@@ -21,7 +21,7 @@
                         data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end"
                         data-kt-menu-flip="bottom">
                         <img alt="Pic" style="object-fit: cover;"
-                            src="<?= (isset($data->foto)) ? base_url('resource/img/fotoMahasiswa/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
+                            src="<?= (isset($data->foto)) ? base_url('resource/img/fotoMahasiswa/' . $data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                     </div>
                 </div>
             </div>
@@ -39,10 +39,11 @@
                             <div class="d-flex flex-center flex-column mb-10">
                                 <div class="symbol mb-3 symbol-100px symbol-circle">
                                     <img alt="Pic" style="object-fit: cover;"
-                                        src="<?= (isset($data->foto)) ? base_url('resource/img/fotoMahasiswa/'.$data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
+                                        src="<?= (isset($data->foto)) ? base_url('resource/img/fotoMahasiswa/' . $data->foto) : base_url('./resource/img/avatars/default.jpg'); ?>" />
                                 </div>
-                                <a href="#"
-                                    class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1"><?= $data->nama_lengkap; ?></a>
+                                <a href="#" class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1">
+                                    <?= $data->nama_lengkap; ?>
+                                </a>
                                 <div class="fs-6 fw-bold text-gray-400 mb-2">Mahasiswa</div>
                                 <div class="fs-6 fw-bold text-gray-400">Politeknik Negeri Bali</div>
                             </div>
@@ -62,77 +63,101 @@
                     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                         <div class="card-header cursor-pointer">
                             <div class="card-title m-0">
-                                <h3 class="fw-bolder m-0">Profile Details</h3>
+                                <h3 class="fw-bolder m-0">Detail Profil</h3>
                             </div>
                             <!-- button untuk memunculkan pop up form -->
                             <button class="btn btn-primary align-self-center" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_1">Edit Profile</button>
                         </div>
                         <div class="card-body p-9">
-                            <?php if($this->session->flashdata('pesan_berhasil')) : ?>
-                            <div class="alert alert-success"><?= $this->session->flashdata('pesan_berhasil'); ?></div>
+                            <?php if ($this->session->flashdata('pesan_berhasil')): ?>
+                                <div class="alert alert-success">
+                                    <?= $this->session->flashdata('pesan_berhasil'); ?>
+                                </div>
                             <?php endif; ?>
-                            <?php if($this->session->flashdata('pesan_gagal')) : ?>
-                            <div class="alert alert-danger"><?= $this->session->flashdata('pesan_gagal'); ?></div>
+                            <?php if ($this->session->flashdata('pesan_gagal')): ?>
+                                <div class="alert alert-danger">
+                                    <?= $this->session->flashdata('pesan_gagal'); ?>
+                                </div>
                             <?php endif; ?>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">NIM</label>
                                 <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-dark"><?= $data->nim; ?></span>
+                                    <span class="fw-bolder fs-6 text-dark">
+                                        <?= $data->nim; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Email</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->email; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->email; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Nama Lengkap</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->nama_lengkap; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->nama_lengkap; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Kelas</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->kelas; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->kelas; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Nomer Hp</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->no_hp; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->no_hp; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Jenis Kelamin</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->jenis_kelamin; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->jenis_kelamin; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Tempat Lahir</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->tempat_lahir; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->tempat_lahir; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Tanggal Lahir</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->tanggal_lahir; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->tanggal_lahir; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Alamat</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->alamat; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->alamat; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-bold text-muted">Agama</label>
                                 <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold fs-6"><?= $data->agama; ?></span>
+                                    <span class="fw-bold fs-6">
+                                        <?= $data->agama; ?>
+                                    </span>
                                 </div>
                             </div>
                             <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
