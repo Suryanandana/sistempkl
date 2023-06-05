@@ -72,22 +72,11 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url('cadmin/surat'); ?>" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
                                 <span>Surat</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">Pengantar PKL</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">PKL</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-toastify.html">Bimbingan</a>
-                                </li>
-                            </ul>
                         </li>
 
                         <li class="sidebar-item">

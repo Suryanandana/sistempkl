@@ -3,10 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cmahasiswa extends CI_Controller
 {
+    protected $nim;
     public function __construct()
     {
         parent::__construct();
         $this->load->model('mmahasiswa');
+        // mengambil data mahasiswa yang login
+        $this->nim = $this->session->userdata('username');
         $this->load->model('mvalidasi');
         $this->mvalidasi->validasiadmin();
     }
@@ -22,10 +25,8 @@ class Cmahasiswa extends CI_Controller
     // yang berhubungan dengan views
     public function profile()
     {
-        // mengambil data mahasiswa yang login
-        $nim = $this->session->userdata('username');
         // ambil data yang login
-        $login['data'] = $this->mmahasiswa->mahasiswalogin($nim);
+        $login['data'] = $this->mmahasiswa->mahasiswalogin($this->nim);
         // masukkan view profile ke variabel data['content']
         $data['content'] = $this->load->view('mahasiswa/profile', $login, TRUE);
         // tampilkan view profile ke view main
@@ -34,13 +35,10 @@ class Cmahasiswa extends CI_Controller
 
     public function simpanProfile()
     {
-        // mengambil data mahasiswa yang login
-        $nim = $this->session->userdata('username');
         // ambil data foto yang login
-        $login['data'] = $this->mmahasiswa->fotomahasiswa($nim);
+        $login['data'] = $this->mmahasiswa->fotomahasiswa($this->nim);
         // simpan lokasi foto lama
         $fotoLama = $login['data'][0]->foto;
-
         // load helper
         $this->load->helper(['form', 'url']);
         // konfigurasi format gambar
@@ -63,9 +61,68 @@ class Cmahasiswa extends CI_Controller
         }
 
         // simpan data
-        $this->load->model('mmahasiswa');
         $this->mmahasiswa->simpanprofile($_POST);
         // tampilkan halaman profile mhs
         redirect('cmahasiswa/profile');
+    }
+
+    public function surat()
+    {
+        // ambil data yang login
+        $login['data'] = $this->mmahasiswa->mahasiswalogin($this->nim);
+        // ambil data surat yang bisa didownload
+        $login['dataSurat'] = $this->mmahasiswa->ambilDataSurat();
+        // ambil surat yang sudah diupload mahasiswa
+        $login['surat'] = $this->mmahasiswa->ambilSurat($this->nim);
+        // masukkan view profile ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/surat', $login, TRUE);
+        // tampilkan view profile ke view main
+        $this->load->view('mahasiswa/main', $data);
+    }
+
+    public function downloadDataSurat()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/file/' . $fileName);
+        force_download($fileName, $data);
+    }
+
+    public function downloadSurat()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/suratMahasiswa/' . $fileName);
+        force_download($fileName, $data);
+    }
+
+    public function uploadSurat()
+    {
+        // load helper
+        $this->load->helper(['form', 'url']);
+        // konfigurasi format gambar
+        $config['upload_path'] = './resource/suratMahasiswa/';
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['max_size'] = 10000;
+        // load library upload dengan konfigurasi yang ada
+        $this->load->library('upload', $config);
+        // jika upload gambar berhasil
+        if ($this->upload->do_upload('dokumen')) {
+            $dokumen = $this->upload->data();
+            $_POST['dokumen'] = $dokumen['file_name'];
+        } else { // jika gagal
+            var_dump($this->upload->display_errors());
+        }
+
+        // simpan data
+        $this->mmahasiswa->simpanDokumen($_POST);
+        // jika berhasil dan gagal
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil disimpan!');
+        } else { // jika gagal
+            $this->session->set_flashdata('pesan_gagal', 'Data gagal disimpan!');
+        }
+        // tampilkan halaman profile mhs
+        redirect('cmahasiswa/surat');
     }
 }

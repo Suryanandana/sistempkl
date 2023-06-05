@@ -40,32 +40,13 @@
                                     <span class="menu-title">Dashboards</span>
                                 </a>
                             </div>
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
-                                <span class="menu-link">
+                            <div class="menu-item mb-1">
+                                <a class="menu-link" href="<?= base_url('cmahasiswa/surat') ?>">
                                     <span class="menu-icon">
-                                        <!-- Icon -->
+                                        <!-- icon -->
                                     </span>
                                     <span class="menu-title">Upload Surat</span>
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <div class="menu-sub menu-sub-accordion">
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Pengajuan PKL</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Industri</span>
-                                        </a>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
                                 <span class="menu-link">
@@ -114,7 +95,7 @@
             <!-- content -->
             <?php
             // load view content yang terdapat pada controller cmahasiswa
-            if(isset($content)){
+            if (isset($content)) {
                 echo $content;
             }
             ?>
@@ -125,11 +106,11 @@
     <script src="<?= base_url('/resource/js/custom/widget.js'); ?>"></script>
     <script src="<?= base_url('/resource/plugin/plugins.bundle.js'); ?>"></script>
     <script>
-    function logout() {
-        if (confirm("Apakah yakin melakukan logout?")) {
-            window.open("<?php echo base_url(); ?>clogin/logout", "_self");
+        function logout() {
+            if (confirm("Apakah yakin melakukan logout?")) {
+                window.open("<?php echo base_url(); ?>clogin/logout", "_self");
+            }
         }
-    }
     </script>
 </body>
 
