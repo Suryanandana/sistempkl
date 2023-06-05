@@ -10,5 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap-icons": "^1.10.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suryanandana/sistempkl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Suryanandana/sistempkl/issues"
+  },
+  "homepage": "https://github.com/Suryanandana/sistempkl#readme"
 }

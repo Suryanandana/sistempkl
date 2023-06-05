@@ -277,4 +277,39 @@ class Madmin extends CI_Model
 		}
 		redirect('cadmin/tampilPkampus');
 	}
+
+	// Surat
+	public function tampilSurat()
+    {
+        $data = $this->db->get('data_surat')->result();
+        return $data;
+    }
+
+	public function tambahSuratPengantarPKL($data)
+    {
+        $this->db->insert('data_surat', $data);
+
+        if ($this->db->affected_rows() > 0) 
+		{
+            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil disimpan!');
+        } 
+		else 
+		{
+            $this->session->set_flashdata('pesan_gagal', 'Data gagal disimpan!');
+        }
+
+		redirect('cadmin/surat');
+    }
+
+	public function hapusSurat($id)
+	{
+		$this->db->where('jenis_surat', $id);
+		$this->db->delete('data_surat');
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
+		}
+		redirect('cadmin/surat');
+	}
 }
