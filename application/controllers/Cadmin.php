@@ -507,4 +507,50 @@ class Cadmin extends CI_Controller
         $this->madmin->hapusSurat($id);
     }
 
+    public function tampilpilihpembimbing()
+    {
+        $dataPerPage = 5;
+        $url = base_url('cadmin/tampilpilihpembimbing');
+        $pencarian = $this->pencarianData();
+        $jumlahpkampus = $this->madmin->totalpkampus($pencarian);
+
+        $this->konfigPagination($url, $jumlahpkampus, $dataPerPage);
+
+        $mulai = $this->getPage($dataPerPage);
+        $data["data"] = $this->madmin->tampilpilihpembimbing();
+        $data["links"] = $this->pagination->create_links();
+        $data["dataPerPage"] = $dataPerPage;
+        $data["no"] = $mulai + 1;
+
+        // list nim
+        $data['listNIM'] = $this->madmin->tampilNIM();
+        // list nip
+        $data['listNIP'] = $this->madmin->tampilNIP();
+        // list id pembimbing industri
+        $data['listIdPindustri'] = $this->madmin->tampilIdPindustri();
+        // load view (sesuaikan)
+        $pilihpembimbing['content'] = $this->load->view('admin/pilihpembimbing', $data, true);
+        $this->load->view('admin/main', $pilihpembimbing);
+    }
+
+
+
+    public function tambahPmahasiswa()
+    {
+        // simpan data yang dikirim lewat form kedalam variabel $data
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'nip' => $this->input->post('nip'),
+            'id_pembimbing_industri' => $this->input->post('id_pembimbing_industri')
+        );
+        $this->madmin->tambahPmahasiswa($data);
+    }
+
+
+    public function hapusPmahasiswa()
+    {
+        $id = $this->input->post('id_pembimbing_mahasiswa');
+        $this->madmin->hapusPmahasiswa($id);
+        var_dump($id);
+    }
 }
