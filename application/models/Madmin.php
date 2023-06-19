@@ -402,4 +402,41 @@ class Madmin extends CI_Model
 		}
 		redirect('cadmin/tampilpilihpembimbing');
 	}
+
+	// surat resmi
+	public function tampilMhsValid($batas, $page, $cari="", $jumlah = false)
+    {
+		$subSurat = $this->db->select('nim')
+                            ->from('surat')
+                            ->where('jenis_surat', 'surat pengajuan')
+                            ->where('status', 'valid')
+                            ->get_compiled_select();
+		
+		$subSuratMahasiswa = $this->db->select('nim')
+                            ->from('surat_mahasiswa')
+                            ->get_compiled_select();
+
+        $this->db->distinct();
+        $this->db->select('mahasiswa.*');
+        $this->db->from('mahasiswa');
+		$this->db->like('nama_lengkap', $cari);
+        $this->db->join('surat', 'mahasiswa.nim = surat.nim');
+        $this->db->where('(surat.jenis_surat = "surat pengantar" AND surat.status = "valid")');
+		$this->db->where('mahasiswa.nim IN ('.$subSurat.')');
+		$this->db->where('mahasiswa.nim NOT IN ('.$subSuratMahasiswa.')');
+		if($jumlah){
+			$query = $this->db->get();
+			return $query->num_rows();
+		} else {
+			$this->db->limit($batas, $page);
+			$query = $this->db->get();
+			return $query->result();
+		}
+    }
+
+	public function simpanSuratResmi($data)
+    {
+        $this->db->insert('surat_mahasiswa', $data);
+        return $this->db->affected_rows();
+    }
 }
