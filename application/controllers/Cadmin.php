@@ -455,7 +455,7 @@ class Cadmin extends CI_Controller
     }
 
     // CRUD Upload Surat
-    public function Surat()
+    public function surat()
     {
         $dataPerPage = 5;
         $mulai = $this->getPage($dataPerPage);
@@ -533,8 +533,6 @@ class Cadmin extends CI_Controller
         $this->load->view('admin/main', $pilihpembimbing);
     }
 
-
-
     public function tambahPmahasiswa()
     {
         // simpan data yang dikirim lewat form kedalam variabel $data
@@ -546,11 +544,59 @@ class Cadmin extends CI_Controller
         $this->madmin->tambahPmahasiswa($data);
     }
 
-
     public function hapusPmahasiswa()
     {
         $id = $this->input->post('id_pembimbing_mahasiswa');
         $this->madmin->hapusPmahasiswa($id);
         var_dump($id);
+    }
+
+    // surat resmi
+    public function suratMhs()
+    {
+        $url = base_url('cadmin/suratMhs');
+        $pencarian = $this->pencarianData();
+        $jumlahIndustri = $this->madmin->tampilMhsValid(0, 0, $pencarian, true);
+        // var_dump($jumlahIndustri);die;
+        $dataPerPage = 5;
+        $this->konfigPagination($url, $jumlahIndustri, $dataPerPage);
+        $mulai = $this->getPage($dataPerPage);
+        $data["data"] = $this->madmin->tampilMhsValid($dataPerPage, $mulai, $pencarian);
+        // var_dump($data['data']);die;
+        $data["links"] = $this->pagination->create_links();
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        $industri['content'] = $this->load->view('admin/suratMhs', $data, true);
+        $this->load->view('admin/main', $industri);
+    }
+
+    public function uploadSuratResmi()
+    {
+        // load helper
+        $this->load->helper(['form', 'url']);
+        // konfigurasi format gambar
+        $config['upload_path'] = './resource/suratResmiPKL/';
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['max_size'] = 10000;
+        // load library upload dengan konfigurasi yang ada
+        $this->load->library('upload', $config);
+        // jika upload gambar berhasil
+        if ($this->upload->do_upload('surat')) {
+            $dokumen = $this->upload->data();
+            $_POST['dokumen'] = $dokumen['file_name'];
+            // simpan data
+            $this->madmin->simpanSuratResmi($_POST);
+        } else { // jika gagal
+            var_dump($this->upload->display_errors());
+        }
+        // die;
+        // jika berhasil dan gagal
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil disimpan!');
+        } else { // jika gagal
+            $this->session->set_flashdata('pesan_gagal', 'Data gagal disimpan!');
+        }
+        // tampilkan halaman profile mhs
+        redirect('cadmin/suratMhs');
     }
 }

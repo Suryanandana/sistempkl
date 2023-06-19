@@ -80,6 +80,13 @@
                         </li>
 
                         <li class="sidebar-item">
+                            <a href="<?= base_url('cadmin/suratmhs'); ?>" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Surat Resmi</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Rekapitulasi PKL</span>
