@@ -21,7 +21,7 @@
                 data-kt-drawer-toggle="#kt_aside_toggle">
                 <!-- Sidebar -->
                 <div class="aside-logo flex-column-auto pt-9 pb-7 px-9" id="kt_aside_logo">
-                    <a href="index.html">
+                    <a href="<?= base_url('cmahasiswa/index') ?>">
                         <h2>Manajemen PKL</h2>
                     </a>
                 </div>
@@ -58,7 +58,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
+                                        <a class="menu-link" href="<?= base_url('cmahasiswa/aktivitaspkl') ?>">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
