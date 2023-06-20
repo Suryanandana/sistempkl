@@ -1,5 +1,15 @@
 # DOKUMENTASI SISTEM PKL
 
+## DAFTAR FOLDER
+Buatlah manual beberapa folder berikut didalam folder resource/...
+dikarenakan folder ini tidak di push
+```sh
+dokumenPKL
+file
+suratMahasiswa
+suratResmiPKL
+import
+```
 ## DAFTAR ISI
 1. [Git Command](https://github.com/Suryanandana/sistempkl#git-command)
 2. [Database Command](https://github.com/Suryanandana/sistempkl#database-command)

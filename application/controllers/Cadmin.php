@@ -590,13 +590,15 @@ class Cadmin extends CI_Controller
             var_dump($this->upload->display_errors());
         }
         // die;
-        // jika berhasil dan gagal
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil disimpan!');
-        } else { // jika gagal
-            $this->session->set_flashdata('pesan_gagal', 'Data gagal disimpan!');
-        }
         // tampilkan halaman profile mhs
         redirect('cadmin/suratMhs');
+    }
+
+    public function downloadSuratResmi()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/suratResmiPKL/' . $fileName);
+        force_download($fileName, $data);
     }
 }
