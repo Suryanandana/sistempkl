@@ -308,7 +308,7 @@ class Cadmin extends CI_Controller
     }
 
 
-    //crud pembimbing kampus
+    //crud pembimbing industri
     public function tampilPembimbingIndustri()
     {
         // isi sesuai nama class / nama method
@@ -507,4 +507,78 @@ class Cadmin extends CI_Controller
         $this->madmin->hapusSurat($id);
     }
 
+
+
+    // Validasi Surat
+    public function tampilValidasiSurat()
+    {
+        // isi sesuai nama class / nama method
+        $url = base_url('cadmin/tampilvalidasisurat');
+        // berfungsi untuk mendapatkan pencarian yang diisi lewat form (gk perlu diubah)
+        $pencarian = $this->pencarianData();
+        // panggil method totalIndustri (sesuaikan), beserta variabel pencarian untuk mengetahui jumlah datanya
+        $jumlahValidasiSurat = $this->madmin->totalValidasiSurat($pencarian);
+        /* sesuaikan mau tampilkan berapa data per halamannya, untuk percobaan isi 1 atau 2 biar gk bnyk.
+            kalau udh berhasil baru sesuaiin lagi isi 5 biar sama */
+        $dataPerPage = 5;
+        // jalankan konfigurasi pagination (gk perlu diubah)
+        $this->konfigPagination($url, $jumlahValidasiSurat, $dataPerPage);
+        // untuk mengetahui sekarang lagi ada di page berapa, untuk menentukan limit data (gk perlu diubah)
+        $mulai = $this->getPage($dataPerPage);
+        // panggil method tampilDataIndustri pada model untuk menjalankan limit (sesuikan nama method)
+        $data["data"] = $this->madmin->tampilDataValidasiSurat($dataPerPage, $mulai, $pencarian);
+        // membuat link pagination pada view nantinya (gk perlu diubah)
+        $data["links"] = $this->pagination->create_links();
+        // untuk menentukan penomeran pada view (keduanya gk perlu diubah)
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        // load view (sesuaikan)
+        $validasiSurat['content'] = $this->load->view('admin/validasiSurat', $data, true);
+        $this->load->view('admin/main', $validasiSurat);
+    }
+
+    public function hapusValidasiSurat()
+    {
+        $id = $this->input->post('id_surat');
+        $this->madmin->hapusValidasiSurat($id);
+    }
+
+    public function editValidasiSurat()
+    {
+        // ambil id industri
+        $id = $this->input->post('id_surat');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'jenis_surat' => $this->input->post('jenis_surat'),
+            'dokumen' => $this->input->post('dokumen'),
+            'status' => $this->input->post('status'),
+        );
+        $this->madmin->editValidasiSurat($id, $data);
+    }
+
+    public function downloadSurat()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/suratMahasiswa/' . $fileName);
+        force_download($fileName, $data);
+    }
+
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

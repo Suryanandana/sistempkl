@@ -112,6 +112,7 @@ class Cmahasiswa extends CI_Controller
             $_POST['dokumen'] = $dokumen['file_name'];
         } else { // jika gagal
             var_dump($this->upload->display_errors());
+            die;
         }
 
         // simpan data
@@ -125,4 +126,6 @@ class Cmahasiswa extends CI_Controller
         // tampilkan halaman profile mhs
         redirect('cmahasiswa/surat');
     }
+
+
 }

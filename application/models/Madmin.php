@@ -312,4 +312,44 @@ class Madmin extends CI_Model
 		}
 		redirect('cadmin/surat');
 	}
+
+	// validasi surat
+	public function tampilDataValidasiSurat($batas, $page, $cari = "")
+	{
+		$this->db->like('nim', $cari);
+		$this->db->limit($batas, $page);
+		$query = $this->db->get('surat');
+		return $query->result();
+	}
+
+	public function totalValidasiSurat($cari = "")
+	{
+		$this->db->like('nim', $cari);
+		$query = $this->db->get('surat');
+		return $query->num_rows();
+	}
+
+	public function hapusValidasiSurat($id)
+	{
+		$this->db->where('id_surat', $id);
+		$this->db->delete('surat');
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Hapus Data!");
+		}
+		redirect('cadmin/tampilValidasiSurat');
+	}
+
+	public function editValidasiSurat($id, $data)
+	{
+		$this->db->where('id_surat', $id);
+		$this->db->update('surat', $data);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Ubah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Ubah Data!");
+		}
+		redirect('cadmin/tampilValidasiSurat');
+	}
 }
