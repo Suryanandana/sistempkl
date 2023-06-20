@@ -38,12 +38,10 @@
                                     <tr>
                                         <th>no</th>
                                         <th>nim</th>
-                                        <th>Email</th>
                                         <th>Nama Lengkap</th>
                                         <th>Kelas</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Tempat Lahir</th>
-                                        <th>Tanggal Lahir</th>
+                                        <th>surat resmi</th>
+                                        <th>surat bimbingan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -57,22 +55,24 @@
                                                 <?= $row->nim ?>
                                             </td>
                                             <td>
-                                                <?= $row->email ?>
-                                            </td>
-                                            <td>
                                                 <?= $row->nama_lengkap ?>
                                             </td>
                                             <td>
                                                 <?= $row->kelas ?>
                                             </td>
                                             <td>
-                                                <?= $row->jenis_kelamin ?>
+                                                <?php if(isset($row->surat_resmi)) : ?>
+                                                <a href="<?= base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_resmi ?>">Download</a>                                                
+                                                <?php else : ?>
+                                                Belum upload surat
+                                                <?php endif; ?>
                                             </td>
                                             <td>
-                                                <?= $row->tempat_lahir ?>
-                                            </td>
-                                            <td>
-                                                <?= $row->tanggal_lahir ?>
+                                            <?php if(isset($row->surat_bimbingan)) : ?>
+                                                <a href="<?= base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_bimbingan ?>">Download</a>                                                
+                                                <?php else : ?>
+                                                Belum upload surat
+                                                <?php endif; ?>
                                             </td>
                                             <th>
                                                 <!-- untuk argumen ke2 pada function hapus&edit sesuaikan dengan primary key tabel -->
@@ -97,103 +97,6 @@
     </section>
 </div>
 
-
-<div class="modal fade" id="tambah-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Tambah Data</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="<?= base_url('cadmin/tambahmahasiswa') ?>" method="POST">
-                <div class="modal-body">
-                    <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
-                    <label for="tambah-nama">NIM</label>
-                    <input type="text" id="tambah-NIM" name="nim" class="form-control">
-                    <label for="tambah-nama">Email</label>
-                    <input type="text" id="tambah-email" name="email" class="form-control">
-                    <label for="tambah-nama">Nama Lengkap</label>
-                    <input type="text" id="tambah-nama_lengap" name="nama_lengkap" class="form-control">
-                    <label for="tambah-nama">kelas</label>
-                    <input type="text" id="tambah-kelas" name="kelas" class="form-control">
-                    <label for="tambah-nama">NO. HP</label>
-                    <input type="text" id="tambah-no_hp" name="bo_hp" class="form-control">
-                    <label for="tambah-nama">Jenis Kelamin</label>
-                    <select class="form-select" name="jenis_kelamin" id="tambah-jenis_kelamin">
-                        <option value="">Pilih jenis kelamin</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-
-                    <label for="tambah-nama">Tempat Lahir</label>
-                    <input type="text" id="tambah-tempat_lahir" name="tempat_lahir" class="form-control">
-                    <label for="tambah-alamat">Tanggal Lahir</label>
-                    <input type="date" id="tambah-tanggal_lahir" name="tanggal_lahir" class="form-control">
-                    <label for="tambah-nama">Alamat</label>
-                    <input type="text" id="tambah-alamat" name="alamat" class="form-control">
-                    <label for="tambah-nama">Agama</label>
-                    <select class="form-select" name="agama" id="tambah-agama">
-                        <option value="">Agama</option>
-                        <option value="Islam">Islam</option>
-                        <option value="Hindu">Hindu</option>
-                        <option value="Protestan">Protestan</option>
-                        <option value="Katolik">Katolik</option>
-                        <option value="Budha">BUdha</option>
-                        <option value="Konghucu">Konghucu</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <input type="submit" class="btn btn-primary" value="Tambah Data">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="hapus-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-danger">
-                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Hapus Data</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="<?= base_url('cadmin/hapusmahasiswa') ?>" method="post">
-                <div class="modal-body">
-                    <!-- sesuaikan name dengan primary key pada tabel -->
-                    <input type="hidden" id="hapus-nim" name="nim">
-                    <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
-                    <label for="hapus-nim">NIM</label>
-                    <input type="text" id="hapus-nimMhs" name="nim" class="form-control">
-                    <label for="hapus-email">Email</label>
-                    <input type="text" id="hapus-email" name="email" class="form-control">
-                    <label for="hapus-nama_lengkap">Nama Lengkap</label>
-                    <input type="text" id="hapus-nama_lengkap" name="nama_lengkap" class="form-control">
-                    <label for="hapus-kelas">kelas</label>
-                    <input type="text" id="hapus-kelas" name="kelas" class="form-control">
-                    <label for="hapus-no_hp">NO. HP</label>
-                    <input type="text" id="hapus-no_hp" name="no_hp" class="form-control">
-                    <label for="hapus-jenis_kelamin">Jenis Kelamin</label>
-                    <input type="text" id="hapus-jenis_kelamin" name="jenis_kelamin" class="form-control">
-                    <label for="hapus-tempat_lahir">Tempat Lahir</label>
-                    <input type="text" id="hapus-tempat_lahir" name="tempat_lahir" class="form-control">
-                    <label for="hapus-tanggal_lahir">Tanggal Lahir</label>
-                    <input type="date" id="hapus-tanggal_lahir" name="tanggal_lahir" class="form-control">
-                    <label for="hapus-alamat">Alamat</label>
-                    <input type="text" id="hapus-alamat" name="alamat" class="form-control">
-                    <label for="hapus-agama">Agama</label>
-                    <input type="text" id="hapus-agama" name="agama" class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <input type="submit" class="btn btn-danger" value="Hapus Data">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -211,7 +114,13 @@
                     <label for="edit-nama_lengkap">Nama Lengkap</label>
                     <input type="text" id="edit-nama_lengkap" name="nama_lengkap" class="form-control" disabled>
                     <label for="edit-nama_lengkap">Upload Surat</label>
-                    <input type="file" name="surat" class="form-control">
+                    <input type="file" name="surat" class="form-control" required>
+                    <label for="jenis_surat">Jenis Surat</label>
+                    <select class="form-select" aria-label="Default select example" name="jenis_surat" required>
+                        <option selected value="">Pilih</option>
+                        <option value="surat resmi pkl">Surat Resmi</option>
+                        <option value="surat bimbingan">Surat Bimbingan</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -245,7 +154,7 @@
         // fungsinya sama seperti hapus hanya beda penamaan
         const td = document.querySelectorAll('#' + baris + ' td');
         document.getElementById('edit-nimMhs').value = td[1].innerText
-        document.getElementById('edit-nama_lengkap').value = td[3].innerText
+        document.getElementById('edit-nama_lengkap').value = td[2].innerText
         // isi input id_industri dengan parameter id untuk menghapus baris
         document.getElementById('edit-nim').value = id;
     }
