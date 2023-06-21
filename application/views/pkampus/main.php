@@ -54,10 +54,10 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
+                                        <a class="menu-link" href="<?= base_url('cpkampus/tampilbimbingan') ?>"">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
-                                            </span>
+                                            </span> 
                                             <span class="menu-title">Bimbingan Mahasiswa</span>
                                         </a>
                                     </div>
