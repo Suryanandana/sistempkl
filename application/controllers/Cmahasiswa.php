@@ -112,6 +112,7 @@ class Cmahasiswa extends CI_Controller
             $_POST['dokumen'] = $dokumen['file_name'];
         } else { // jika gagal
             var_dump($this->upload->display_errors());
+            die;
         }
 
         // simpan data
@@ -124,5 +125,22 @@ class Cmahasiswa extends CI_Controller
         }
         // tampilkan halaman profile mhs
         redirect('cmahasiswa/surat');
+    }
+    public function aktivitasPKL()
+    {
+        // ambil data yang login
+        $login['data'] = $this->mmahasiswa->ambilAktivitas($this->nim);
+        // masukkan view profile ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/aktivitasPKL', $login, TRUE);
+        // tampilkan view profile ke view main
+        $this->load->view('mahasiswa/main', $data);
+    }
+
+    public function downloadSuratPKL()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/dokumenPKL/' . $fileName);
+        force_download($fileName, $data);
     }
 }

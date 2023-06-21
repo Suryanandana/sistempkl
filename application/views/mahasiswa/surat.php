@@ -171,7 +171,7 @@
                             <label>Jenis Surat</label>
                             <select name="jenis_surat" class="form-select">
                                 <option value="surat pengajuan">Surat Pengajuan</option>
-                                <option value="surat pengantar">Surat Pengantar</option>
+                                <option value="surat pengantar">Surat Resmi PKL</option>
                             </select>
                         </div>
                     </div>

@@ -88,4 +88,14 @@ class Mmahasiswa extends CI_Model
         $this->db->insert('surat', $data);
         return $this->db->affected_rows();
     }
+
+    public function ambilAktivitas($nim)
+    {
+        $this->db->select('*');
+        $this->db->from('aktivitas');
+        $this->db->join('pembimbing_mahasiswa', 'aktivitas.id_pembimbing_mahasiswa = pembimbing_mahasiswa.id_pembimbing_mahasiswa');
+        $this->db->where('pembimbing_mahasiswa.nim', $nim);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

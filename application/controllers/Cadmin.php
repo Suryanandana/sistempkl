@@ -308,7 +308,7 @@ class Cadmin extends CI_Controller
     }
 
 
-    //crud pembimbing kampus
+    //crud pembimbing industri
     public function tampilPembimbingIndustri()
     {
         // isi sesuai nama class / nama method
@@ -455,7 +455,7 @@ class Cadmin extends CI_Controller
     }
 
     // CRUD Upload Surat
-    public function Surat()
+    public function surat()
     {
         $dataPerPage = 5;
         $mulai = $this->getPage($dataPerPage);
@@ -505,6 +505,158 @@ class Cadmin extends CI_Controller
     {
         $id = $this->input->post('jenis_surat');
         $this->madmin->hapusSurat($id);
+    }
+
+    public function tampilpilihpembimbing()
+    {
+        $dataPerPage = 5;
+        $url = base_url('cadmin/tampilpilihpembimbing');
+        $pencarian = $this->pencarianData();
+        $jumlahpkampus = $this->madmin->totalpkampus($pencarian);
+
+        $this->konfigPagination($url, $jumlahpkampus, $dataPerPage);
+
+        $mulai = $this->getPage($dataPerPage);
+        $data["data"] = $this->madmin->tampilpilihpembimbing();
+        $data["links"] = $this->pagination->create_links();
+        $data["dataPerPage"] = $dataPerPage;
+        $data["no"] = $mulai + 1;
+
+        // list nim
+        $data['listNIM'] = $this->madmin->tampilNIM();
+        // list nip
+        $data['listNIP'] = $this->madmin->tampilNIP();
+        // list id pembimbing industri
+        $data['listIdPindustri'] = $this->madmin->tampilIdPindustri();
+        // load view (sesuaikan)
+        $pilihpembimbing['content'] = $this->load->view('admin/pilihpembimbing', $data, true);
+        $this->load->view('admin/main', $pilihpembimbing);
+    }
+
+    public function tambahPmahasiswa()
+    {
+        // simpan data yang dikirim lewat form kedalam variabel $data
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'nip' => $this->input->post('nip'),
+            'id_pembimbing_industri' => $this->input->post('id_pembimbing_industri')
+        );
+        $this->madmin->tambahPmahasiswa($data);
+    }
+
+    public function hapusPmahasiswa()
+    {
+        $id = $this->input->post('id_pembimbing_mahasiswa');
+        $this->madmin->hapusPmahasiswa($id);
+        var_dump($id);
+    }
+
+    // surat resmi
+    public function suratMhs()
+    {
+        $url = base_url('cadmin/suratMhs');
+        $pencarian = $this->pencarianData();
+        $jumlahIndustri = $this->madmin->tampilMhsValid(0, 0, $pencarian, true);
+        // var_dump($jumlahIndustri);die;
+        $dataPerPage = 5;
+        $this->konfigPagination($url, $jumlahIndustri, $dataPerPage);
+        $mulai = $this->getPage($dataPerPage);
+        $data["data"] = $this->madmin->tampilMhsValid($dataPerPage, $mulai, $pencarian);
+        // var_dump($data['data']);die;
+        $data["links"] = $this->pagination->create_links();
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        $industri['content'] = $this->load->view('admin/suratMhs', $data, true);
+        $this->load->view('admin/main', $industri);
+    }
+
+    public function uploadSuratResmi()
+    {
+        // load helper
+        $this->load->helper(['form', 'url']);
+        // konfigurasi format gambar
+        $config['upload_path'] = './resource/suratResmiPKL/';
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['max_size'] = 10000;
+        // load library upload dengan konfigurasi yang ada
+        $this->load->library('upload', $config);
+        // jika upload gambar berhasil
+        if ($this->upload->do_upload('surat')) {
+            $dokumen = $this->upload->data();
+            $_POST['dokumen'] = $dokumen['file_name'];
+            // simpan data
+            $this->madmin->simpanSuratResmi($_POST);
+        } else { // jika gagal
+            var_dump($this->upload->display_errors());
+        }
+        // die;
+        // tampilkan halaman profile mhs
+        redirect('cadmin/suratMhs');
+    }
+
+    public function downloadSuratResmi()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/suratResmiPKL/' . $fileName);
+        force_download($fileName, $data);
+    }
+
+    // Validasi Surat
+    public function tampilValidasiSurat()
+    {
+        // isi sesuai nama class / nama method
+        $url = base_url('cadmin/tampilvalidasisurat');
+        // berfungsi untuk mendapatkan pencarian yang diisi lewat form (gk perlu diubah)
+        $pencarian = $this->pencarianData();
+        // panggil method totalIndustri (sesuaikan), beserta variabel pencarian untuk mengetahui jumlah datanya
+        $jumlahValidasiSurat = $this->madmin->totalValidasiSurat($pencarian);
+        /* sesuaikan mau tampilkan berapa data per halamannya, untuk percobaan isi 1 atau 2 biar gk bnyk.
+            kalau udh berhasil baru sesuaiin lagi isi 5 biar sama */
+        $dataPerPage = 5;
+        // jalankan konfigurasi pagination (gk perlu diubah)
+        $this->konfigPagination($url, $jumlahValidasiSurat, $dataPerPage);
+        // untuk mengetahui sekarang lagi ada di page berapa, untuk menentukan limit data (gk perlu diubah)
+        $mulai = $this->getPage($dataPerPage);
+        // panggil method tampilDataIndustri pada model untuk menjalankan limit (sesuikan nama method)
+        $data["data"] = $this->madmin->tampilDataValidasiSurat($dataPerPage, $mulai, $pencarian);
+        // membuat link pagination pada view nantinya (gk perlu diubah)
+        $data["links"] = $this->pagination->create_links();
+        // untuk menentukan penomeran pada view (keduanya gk perlu diubah)
+        $data['dataPerPage'] = $dataPerPage;
+        $data['no'] = $mulai + 1;
+        // load view (sesuaikan)
+        $validasiSurat['content'] = $this->load->view('admin/validasiSurat', $data, true);
+        $this->load->view('admin/main', $validasiSurat);
+    }
+
+    public function hapusValidasiSurat()
+    {
+        $id = $this->input->post('id_surat');
+        // var_dump($id);die;
+        $this->madmin->hapusValidasiSurat($id);
+    }
+
+    public function editValidasiSurat()
+    {
+        // ambil id industri
+        $id = $this->input->post('id_surat');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'nim' => $this->input->post('nim'),
+            'jenis_surat' => $this->input->post('jenis_surat'),
+            'dokumen' => $this->input->post('dokumen'),
+            'status' => $this->input->post('status'),
+        );
+        $this->madmin->editValidasiSurat($id, $data);
+    }
+
+    public function downloadSurat()
+    {
+        $fileName = str_replace(' ', '%20', $_GET['file']);
+        $this->load->helper('download');
+        $data = file_get_contents(base_url() . 'resource/suratMahasiswa/' . $fileName);
+        force_download($fileName, $data);
     }
 
 }
