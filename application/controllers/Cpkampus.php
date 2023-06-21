@@ -9,6 +9,7 @@ class Cpkampus extends CI_Controller
         parent::__construct();
         $this->load->model('mpkampus');
         $this->load->model('mvalidasi');
+        $this->load->library('pagination');
         $this->mvalidasi->validasiPkampus();
     }
 
@@ -57,5 +58,27 @@ class Cpkampus extends CI_Controller
         $this->mpkampus->simpanProfile($_POST);
         // tampilkan halaman profile mhs
         redirect('cpkampus/profile');
+    }
+
+
+
+    public function tampilbimbingan()
+    {
+        $nip = $this->session->userdata('username');
+        $login['data'] = $this->mpkampus->tampildatabimbingan($nip);
+        $data['content'] = $this->load->view('pkampus/bimbinganMhs', $login, true);
+        $this->load->view('pkampus/main', $data);
+    }
+
+    public function editbimbingan()
+    {
+        $id = $this->input->post('id_bimbingan');
+        // ambil data perubahan untuk disimpan
+        $data = array(
+            'id_bimbingan' => $this->input->post('id_bimbingan'),
+            'status' => $this->input->post('status'),
+        );
+        // var_dump($data);die;
+        $this->mpkampus->editbimbingan($data);
     }
 }
