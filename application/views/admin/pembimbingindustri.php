@@ -319,16 +319,16 @@
         // dan isi valuenya dengan kolom index ke 0 yaitu nama
         // jika kolom dengan index ke 1 artinya alamat dan seterusnya
         //  sesuai dengan urutan pada kolom tabel diatas kecuali no dan aksi tidak dihitung
-        document.getElementById('hapus-email').value = td[0].innerText
-        document.getElementById('hapus-nama_lengkap').value = td[1].innerText
-        document.getElementById('hapus-jabatan').value = td[2].innerText
-        document.getElementById('hapus-no_hp').value = td[3].innerText
-        document.getElementById('hapus-jenis_kelamin').value = td[4].innerText
-        document.getElementById('hapus-tempat_lahir').value = td[5].innerText
-        document.getElementById('hapus-tanggal_lahir').value = td[6].innerText
-        document.getElementById('hapus-alamat').value = td[7].innerText
-        document.getElementById('hapus-agama').value = td[8].innerText
-        document.getElementById('hapus-foto').value = td[9].innerText
+        document.getElementById('hapus-email').value = td[1].innerText
+        document.getElementById('hapus-nama_lengkap').value = td[2].innerText
+        document.getElementById('hapus-jabatan').value = td[3].innerText
+        document.getElementById('hapus-no_hp').value = td[4].innerText
+        document.getElementById('hapus-jenis_kelamin').value = td[5].innerText
+        document.getElementById('hapus-tempat_lahir').value = td[6].innerText
+        document.getElementById('hapus-tanggal_lahir').value = td[7].innerText
+        document.getElementById('hapus-alamat').value = td[8].innerText
+        document.getElementById('hapus-agama').value = td[9].innerText
+        document.getElementById('hapus-foto').value = td[10].innerText
         // isi input id_industri dengan parameter id untuk menghapus baris
         document.getElementById('hapus-id_pembimbing_industri').value = id;
     }
@@ -337,16 +337,16 @@
         // fungsinya sama seperti hapus hanya beda penamaan
         const td = document.querySelectorAll('#' + baris + ' td');
 
-        document.getElementById('edit-email').value = td[0].innerText
-        document.getElementById('edit-nama_lengkap').value = td[1].innerText
-        document.getElementById('edit-jabatan').value = td[2].innerText
-        document.getElementById('edit-no_hp').value = td[3].innerText
-        document.getElementById('edit-jenis_kelamin').value = td[4].innerText
-        document.getElementById('edit-tempat_lahir').value = td[5].innerText
-        document.getElementById('edit-tanggal_lahir').value = td[6].innerText
-        document.getElementById('edit-alamat').value = td[7].innerText
-        document.getElementById('edit-agama').value = td[8].innerText
-        document.getElementById('edit-foto').value = td[9].innerText
+        document.getElementById('edit-email').value = td[1].innerText
+        document.getElementById('edit-nama_lengkap').value = td[2].innerText
+        document.getElementById('edit-jabatan').value = td[3].innerText
+        document.getElementById('edit-no_hp').value = td[4].innerText
+        document.getElementById('edit-jenis_kelamin').value = td[5].innerText
+        document.getElementById('edit-tempat_lahir').value = td[6].innerText
+        document.getElementById('edit-tanggal_lahir').value = td[7].innerText
+        document.getElementById('edit-alamat').value = td[8].innerText
+        document.getElementById('edit-agama').value = td[9].innerText
+        document.getElementById('edit-foto').value = td[10].innerText
 
         document.getElementById('edit-id_pembimbing_industri').value = id;
     }
