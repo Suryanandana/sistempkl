@@ -111,22 +111,12 @@
                     <input type="text" id="hapus-nim" name="nim" class="form-control">
 
                     <label for="hapus-jenis_surat">Jenis Surat</label>
-                    <select name="jenis_surat" id="hapus-jenis_surat" class="form-control">
-                        <option value="">Pilih jenis surat</option>
-                        <option value="surat_pengajuan">Surat Pengajuan</option>
-                        <option value="surat_resmi_pkl">Surat Resmi PKL</option>
-                    </select>
-
-                    <label for="hapus-dokumen">Dokumen</label>
-                    <input type="file" id="hapus-dokumen" name="dokumen" class="form-control">
+                    <input type="text" name="jenis_surat" id="hapus-jenis_surat" class="form-control">
+                    </input>
 
                     <label for="hapus-status">Status</label>
-                    <select name="status" id="hapus-status" class="form-control">
-                        <option value="">Pilih Status</option>
-                        <option value="valid">Valid</option>
-                        <option value="tidak_valid">Tidak Valid</option>
-                        <option value="belum_tervalidasi">Belum Tervalidasi</option>
-                    </select>
+                    <input type="text" name="status" id="hapus-status" class="form-control" disabled>
+                    </input>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -154,14 +144,8 @@
                     <input type="text" id="edit-nim" name="nim" class="form-control">
 
                     <label for="edit-jenis_surat">Jenis Surat</label>
-                    <select name="jenis_surat" id="edit-jenis_surat" class="form-control">
-                        <option value="">Pilih jenis surat</option>
-                        <option value="surat pengajuan">Surat Pengajuan</option>
-                        <option value="surat resmi pkl">Surat Resmi PKL</option>
-                    </select>
-
-                    <label for="edit-dokumen">Dokumen</label>
-                    <input type="file" id="edit-dokumen" name="dokumen" class="form-control">
+                    <input type="text" name="jenis_surat" id="edit-jenis_surat" class="form-control" disabled>
+                    </input>
 
                     <label for="edit-status">Status</label>
                     <select name="status" id="edit-status" class="form-control">
@@ -183,6 +167,7 @@
 <script>
     function hapus(baris, id) {
         const td = document.querySelectorAll('#' + baris + ' td');
+        console.log(id)
         // isi tiap input seuaikan nama idnya dan isi nilai
         // contoh dibawah artinya pilih input dengan attribut id hapus-nama
         // dan isi valuenya dengan kolom index ke 0 yaitu nama
@@ -190,7 +175,6 @@
         //  sesuai dengan urutan pada kolom tabel diatas kecuali no dan aksi tidak dihitung
         document.getElementById('hapus-nim').value = td[1].innerText
         document.getElementById('hapus-jenis_surat').value = td[2].innerText
-        document.getElementById('hapus-dokumen').value = td[3].innerText
         document.getElementById('hapus-status').value = td[4].innerText
         // isi input id_industri dengan parameter id untuk menghapus baris
         document.getElementById('hapus-id_surat').value = id;
@@ -202,7 +186,6 @@
 
         document.getElementById('edit-nim').value = td[1].innerText
         document.getElementById('edit-jenis_surat').value = td[2].innerText
-        document.getElementById('edit-dokumen').value = td[3].innerText
         document.getElementById('edit-status').value = td[4].innerText
 
         document.getElementById('edit-id_surat').value = id;

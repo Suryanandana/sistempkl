@@ -65,34 +65,31 @@
                             </ul>
                         </li>
 
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-collection-fill"></i>
+                                <span>Data Surat</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="<?= base_url('cadmin/surat'); ?>">Master Surat</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href=<?= base_url('cadmin/suratmhs'); ?>>Surat Resmi</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="<?= base_url('cadmin/tampilvalidasisurat'); ?>">Validasi Surat</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="sidebar-item">
                             <a href="<?= base_url('cadmin/tampilpilihpembimbing'); ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Pemilihan Pembimbing</span>
                             </a>
                         </li>
-
-                        <li class="sidebar-item">
-                            <a href="<?= base_url('cadmin/surat'); ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Surat</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="<?= base_url('cadmin/suratmhs'); ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Surat Resmi</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="<?= base_url('cadmin/tampilvalidasisurat'); ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Validasi Surat</span>
-                            </a>
-                        </li>
-
+                        
                         <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>

@@ -422,8 +422,6 @@ class Madmin extends CI_Model
 	{
 		$this->db->where('id_surat', $id);
 		$this->db->delete('surat');
-		$this->db->where('id_surat', $id);
-		$this->db->delete('surat');
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('pesan_berhasil', "Berhasil Hapus Data!");
 		} else {
@@ -452,21 +450,12 @@ class Madmin extends CI_Model
 			->where('jenis_surat', 'surat pengajuan')
 			->where('status', 'valid')
 			->get_compiled_select();
-		$subSuratResmi = $this->db->select('surat_mahasiswa.dokumen')
-			->from('surat_mahasiswa')
-			->where('jenis_surat', 'surat resmi pkl')
-			->get_compiled_select();
-		$subSuratBimbingan = $this->db->select('surat_mahasiswa.dokumen')
-			->from('surat_mahasiswa')
-			->where('jenis_surat', 'surat bimbingan')
-			->get_compiled_select();
 		$this->db->distinct();
-		$this->db->select('mahasiswa.nim, nama_lengkap, kelas, (' . $subSuratResmi . ') as surat_resmi,
-			(' . $subSuratBimbingan . ') as surat_bimbingan');
+		$this->db->select('mahasiswa.nim, nama_lengkap, kelas');
 		$this->db->from('mahasiswa');
 		$this->db->like('nama_lengkap', $cari);
 		$this->db->join('surat', 'mahasiswa.nim = surat.nim');
-		$this->db->join('surat_mahasiswa', 'mahasiswa.nim = surat_mahasiswa.nim');
+		$this->db->join('surat_mahasiswa', 'mahasiswa.nim = surat_mahasiswa.nim', 'left');
 		$this->db->where('(surat.jenis_surat = "surat pengantar" AND surat.status = "valid")');
 		$this->db->where('mahasiswa.nim IN (' . $subSurat . ')');
 		if ($jumlah) {
@@ -475,6 +464,7 @@ class Madmin extends CI_Model
 		} else {
 			$this->db->limit($batas, $page);
 			$query = $this->db->get();
+			// echo "<pre>",var_dump($query->result()),"</pre>";die;
 			return $query->result();
 		}
 	}

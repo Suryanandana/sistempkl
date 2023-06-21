@@ -40,8 +40,8 @@
                                         <th>nim</th>
                                         <th>Nama Lengkap</th>
                                         <th>Kelas</th>
-                                        <th>surat resmi</th>
-                                        <th>surat bimbingan</th>
+                                        <!-- <th>surat resmi</th>
+                                        <th>surat bimbingan</th> -->
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -60,20 +60,20 @@
                                             <td>
                                                 <?= $row->kelas ?>
                                             </td>
-                                            <td>
-                                                <?php if(isset($row->surat_resmi)) : ?>
-                                                <a href="<?= base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_resmi ?>">Download</a>                                                
-                                                <?php else : ?>
+                                            <!-- <td>
+                                                <?php //if(isset($row->surat_resmi)) : ?>
+                                                <a href="<?php //echo base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_resmi ?>">Download</a>                                                
+                                                <?php //else : ?>
                                                 Belum upload surat
-                                                <?php endif; ?>
+                                                <?php //endif; ?>
                                             </td>
                                             <td>
-                                            <?php if(isset($row->surat_bimbingan)) : ?>
-                                                <a href="<?= base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_bimbingan ?>">Download</a>                                                
-                                                <?php else : ?>
+                                            <?php //if(isset($row->surat_bimbingan)) : ?>
+                                                <a href="<?php // echo base_url() . 'cadmin/downloadsuratresmi?file=' . $row->surat_bimbingan ?>">Download</a>                                                
+                                                <?php //else : ?>
                                                 Belum upload surat
-                                                <?php endif; ?>
-                                            </td>
+                                                <?php //endif; ?>
+                                            </td> -->
                                             <th>
                                                 <!-- untuk argumen ke2 pada function hapus&edit sesuaikan dengan primary key tabel -->
                                                 <!-- contohnya jika tabel mahasiswa maka isi $row->nim -->

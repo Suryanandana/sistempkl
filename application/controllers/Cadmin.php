@@ -633,6 +633,7 @@ class Cadmin extends CI_Controller
     public function hapusValidasiSurat()
     {
         $id = $this->input->post('id_surat');
+        // var_dump($id);die;
         $this->madmin->hapusValidasiSurat($id);
     }
 
