@@ -43,6 +43,7 @@ class Cpindustri extends CI_Controller
         if ($this->upload->do_upload('foto')) {
             $dataImg = $this->upload->data();
             $_POST['foto'] = $dataImg['file_name'];
+            // mengecek foto lama, jika ada maka ganti dengan yang baru
             if (isset($fotoLama)) {
                 unlink('./resource/img/fotoPembimbingIndustri/' . $fotoLama);
             }
@@ -65,5 +66,36 @@ class Cpindustri extends CI_Controller
         die;
         $data['content'] = $this->load->view('pindustri/profile', $login, true);
         $this->load->view('pindustri/main', $data);
+    }
+
+    public function tampilNilai()
+    {
+        $id_pembimbing_industri = $this->session->userdata('username');
+        $login['data'] = $this->mpindustri->dataNilai($id_pembimbing_industri);
+        $login['listNIM'] = $this->mpindustri->getNIM($id_pembimbing_industri);
+        $data['content'] = $this->load->view('pindustri/nilai', $login, true);
+        $this->load->view('pindustri/main', $data);
+    }
+
+    public function inputNilai()
+    {
+        $nip = $this->session->userdata('username');
+        $nim = $this->input->post('nim'); 
+
+        if (!empty($nim)) {
+            $mahasiswa = $this->mpindustri->nimPembimbingMahasiswa($nim);
+            if (!empty($mahasiswa)) {
+                $data = array(
+                    'id_pembimbing_mahasiswa' => $mahasiswa['id_pembimbing_mahasiswa'],
+                    'nilai_motivasi_industri' => $this->input->post('nilai_motivasi_industri'),
+                    'nilai_kreativitas_industri' => $this->input->post('nilai_kreativitas_industri'),
+                    'nilai_disiplin_industri' => $this->input->post('nilai_disiplin_industri'),
+                    'nilai_pembahasan_industri' => $this->input->post('nilai_pembahasan_industri'),
+                    'feedback_industri' => $this->input->post('feedback_industri')
+                );
+
+                $this->mpindustri->tambahDataNilai($data);
+            }
+        }
     }
 }
