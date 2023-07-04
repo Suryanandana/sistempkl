@@ -11,7 +11,7 @@
                         <a href="index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <li class="breadcrumb-item text-muted">Account</li>
-                    <li class="breadcrumb-item text-dark">Aktivitas PKL</li>
+                    <li class="breadcrumb-item text-dark">Bimbingan</li>
                 </ul>
             </div>
             <div class="d-flex align-items-stretch flex-shrink-0">
@@ -31,7 +31,7 @@
             <div class="d-flex flex-column">
                 <div class="w-100 mb-10 bg-white p-10">
                     <button class="btn btn-primary mb-8" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
-                        Upload Aktivitas
+                        Upload Bimbingan
                     </button>
                     <?php if($this->session->flashdata('pesan_berhasil')) : ?>
                                 <div class="alert alert-success">
@@ -44,16 +44,13 @@
                                 </div>
                             <?php endif; ?>
 
-                    <table id="datatable" class="table table-striped" style="width:100%" enctype="multipart/form-data">
+                    <table id="datatable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama aktivitas</th>
-                                <th>Deskripsi aktivitas</th>
-                                <th>Tanggal Aktivitas</th>
-                                <th>Dokumen</th>
-                                <th>Validasi kampus</th>
-                                <th>Validasi industri</th>
+                                <th>Keterangan Bimbingan</th>
+                                <th>Tanggal Bimbingan</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,27 +62,13 @@
                                         <?= $no++; ?>
                                     </td>
                                     <td>
-                                        <?= $row->nama_aktivitas ?>
+                                        <?= $row->keterangan_bimbingan ?>
                                     </td>
                                     <td>
-                                        <?= $row->deskripsi_aktivitas ?>
+                                        <?= $row->tanggal_bimbingan ?>
                                     </td>
                                     <td>
-                                        <?= $row->tanggal_aktivitas ?>
-                                    </td>
-                                    <td>
-                                        <?php if (isset($row->dokumen)): ?>
-                                            <a
-                                                href="<?= base_url('cmahasiswa/downloadSuratPKL?file=' . $row->dokumen) ?>">Download</a>
-                                        <?php else: ?>
-                                            <span>Blum upload surat</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?= $row->validasi_kampus ?>
-                                    </td>
-                                    <td>
-                                        <?= $row->validasi_industri ?>
+                                        <?= $row->status ?>
                                     </td>
                                 </tr>
                                 <?php $no++; ?>
@@ -112,39 +95,24 @@
                 <!--end::Close-->
             </div>
 
-            <form action="<?= base_url('cmahasiswa/tambahaktivitaspkl'); ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('cmahasiswa/#'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-6">
-                        <input type="hidden" id="tambah-id_aktivitas" name="id_aktivitas">
-                            <label>Nama Aktivitas</label>
-                            <input type="text" class="form-control" name="nama_aktivitas" />
+                        <input type="hidden" id="tambah-id_bimbingan" name="id_bimbingan">
+                            <label>Keterangan Bimbingan</label>
+                            <input type="text" class="form-control" name="keterangan_bimbingan" />
                         </div>
                         <div class="col-6">
-                            <label>Deskripsi Aktivitas</label>
-                            <input type="text" class="form-control" name="deskripsi_aktivitas" />
+                            <label>Tanggal Bimbingan</label>
+                            <input type="date" class="form-control" name="tanggal_bimbingan" />
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-6">
-                            <label>Tanggal Aktivitas</label>
-                            <input type="date" class="form-control" name="tanggal_aktivitas" />
+                            <label>Status</label>
+                            <input type="text" class="form-control" name="status" />
                         </div>
-                        <div class="col-6">
-                            <label>Dokumen</label>
-                            <input type="file" class="form-control" name="dokumen" />
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <label>Validasi Kampus</label>
-                            <input type="text" class="form-control" name="validasi_kampus" />
-                        </div>
-                        <div class="col-6">
-                            <label>Validasi Industri</label>
-                            <input type="text" class="form-control" name="validasi_industri" />
-                        </div>
-                    </div>
                 </div>
 
                 <div class="modal-footer">

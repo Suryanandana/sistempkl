@@ -14,6 +14,7 @@ class Cmahasiswa extends CI_Controller
         $this->mvalidasi->validasiadmin();
     }
 
+
     public function index()
     {
         // masukkan view dashboard ke variabel data['content']
@@ -126,15 +127,16 @@ class Cmahasiswa extends CI_Controller
         // tampilkan halaman profile mhs
         redirect('cmahasiswa/surat');
     }
-    public function aktivitasPKL()
-    {
+    
+    //public function aktivitasPKL()
+    //{
         // ambil data yang login
-        $login['data'] = $this->mmahasiswa->ambilAktivitas($this->nim);
+        //$login['data'] = $this->mmahasiswa->ambilAktivitas($this->nim);
         // masukkan view profile ke variabel data['content']
-        $data['content'] = $this->load->view('mahasiswa/aktivitasPKL', $login, TRUE);
+        //$data['content'] = $this->load->view('mahasiswa/aktivitasPKL', $login, TRUE);
         // tampilkan view profile ke view main
-        $this->load->view('mahasiswa/main', $data);
-    }
+        //$this->load->view('mahasiswa/main', $data);
+    //}
 
     public function downloadSuratPKL()
     {
@@ -143,4 +145,34 @@ class Cmahasiswa extends CI_Controller
         $data = file_get_contents(base_url() . 'resource/dokumenPKL/' . $fileName);
         force_download($fileName, $data);
     }
+
+    //aktivitas PKL
+    public function tampilAktivitasPKL(){
+        $nim = $this->session->userdata('username');
+       // ambil data yang login
+        $login['data'] = $this->mmahasiswa->tampildataaktivitaspkl($this->nim);
+        // masukkan view profile ke variabel data['content']
+        $data['content'] = $this->load->view('mahasiswa/aktivitasPKL', $login, TRUE);
+        // tampilkan view profile ke view main
+        $this->load->view('mahasiswa/main', $data); 
+    }
+
+
+    public function tambahAktivitasPKL()
+    {    
+        $id_pembimbing_mahasiswa = $this->mmahasiswa->getidpembimbingmahasiswa($this->nim);
+
+        // simpan data yang dikirim lewat form kedalam variabel $data
+        $data = array(
+            'nama_aktivitas' => $this->input->post('nama_aktivitas'),
+            'deskripsi_aktivitas' => $this->input->post('deskripsi_aktivitas'),
+            'tanggal_aktivitas' => $this->input->post('tanggal_aktivitas'),
+            'dokumen' => '',
+            'validasi_kampus' => "Belum Tervalidasi",
+            'validasi_industri' => "Belum Tervalidasi",
+            'id_pembimbing_mahasiswa' => $id_pembimbing_mahasiswa
+        );
+        $this->mmahasiswa->tambahdataaktivitaspkl($data);
+    }
+
 }
