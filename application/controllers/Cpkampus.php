@@ -81,4 +81,35 @@ class Cpkampus extends CI_Controller
         // var_dump($data);die;
         $this->mpkampus->editbimbingan($data);
     }
+
+    public function tampilnilai()
+    {
+        $nip = $this->session->userdata('username');
+        $login['data'] = $this->mpkampus->tampildatanilai($nip);
+        $login['listNIM'] = $this->mpkampus->tampilNIM($nip);
+        $data['content'] = $this->load->view('pkampus/nilaiMhs', $login, true);
+        $this->load->view('pkampus/main', $data);
+    }
+
+    public function tambahnilai()
+    {
+        $nip = $this->session->userdata('username');
+        $nim = $this->input->post('nim'); 
+
+        if (!empty($nim)) {
+            $mahasiswa = $this->mpkampus->nimPM($nim);
+            if (!empty($mahasiswa)) {
+                $data = array(
+                    'id_pembimbing_mahasiswa' => $mahasiswa['id_pembimbing_mahasiswa'],
+                    'nilai_motivasi_kampus' => $this->input->post('nilai_motivasi_kampus'),
+                    'nilai_kreativitas_kampus' => $this->input->post('nilai_kreativitas_kampus'),
+                    'nilai_disiplin_kampus' => $this->input->post('nilai_disiplin_kampus'),
+                    'nilai_pembahasan_kampus' => $this->input->post('nilai_pembahasan_kampus'),
+                    'feedback_kampus' => $this->input->post('feedback_kampus')
+                );
+
+                $this->mpkampus->tambahdatanilai($data);
+            }
+        }
+    }
 }
