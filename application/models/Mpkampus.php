@@ -70,7 +70,62 @@
         redirect('cpkampus/tampilbimbingan');
     }
     
+    public function tampildatanilai($id_pembimbing_kampus)
+        {
+            $this->db->select('nilai.*,mahasiswa.nama_lengkap')->from('pembimbing_mahasiswa')
+                ->where('pembimbing_mahasiswa.nip', $id_pembimbing_kampus)
+                ->join('pembimbing_kampus', 'pembimbing_mahasiswa.nip = pembimbing_kampus.nip')
+                ->join('mahasiswa', 'pembimbing_mahasiswa.nim = mahasiswa.nim')
+                ->join('nilai', 'pembimbing_mahasiswa.id_pembimbing_mahasiswa = nilai.id_pembimbing_mahasiswa');
+            $query = $this->db->get();
+            $data = $query->result();
+            // var_dump($data);die;
+            return $data;
+        }
+
+        public function tampilNIM($nip)
+        {
+            $this->db->select('nim');
+            $this->db->where('nip', $nip);
+            $query = $this->db->get('pembimbing_mahasiswa');
+            $listNIM = array();
+
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $listNIM[] = $row;
+                }
+            }
+
+            return $listNIM;
+        }
+
+        public function nimPM($nim)
+        {
+            return $this->db->get_where('pembimbing_mahasiswa', ['nim' => $nim])->row_array();
+        }
+
+        public function tambahdatanilai($data)
+        {
+            $db_debug = $this->db->db_debug;
+            $this->db->db_debug = false;
+            $this->db->insert('nilai', $data);
+
+            $error = $this->db->error();
+            if (str_contains($error['message'], 'Duplicate entry')) {
+                if (str_contains($error['message'], 'id_pembimbing_mahasiswa')) {
+                    $message = 'NIM yang Anda masukkan sudah terdaftar!';
+                    $this->session->set_flashdata('pesan_gagal', $message);
+                    redirect('cpkampus/tampilnilai');
+                }
+            }
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('pesan_berhasil', "Berhasil Tambah Data!");
+            } else {
+                $this->session->set_flashdata('pesan_gagal', "Gagal Tambah Data!");
+            }
+            $this->db->db_debug = $db_debug;
+            redirect('cpkampus/tampilnilai');
+        }
     }
-
-
 ?>
