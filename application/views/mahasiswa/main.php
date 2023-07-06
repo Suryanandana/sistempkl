@@ -58,7 +58,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="<?= base_url('cmahasiswa/aktivitaspkl') ?>">
+                                        <a class="menu-link" href="<?= base_url('cmahasiswa/tampilaktivitaspkl') ?>">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>

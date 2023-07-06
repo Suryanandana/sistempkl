@@ -89,13 +89,50 @@ class Mmahasiswa extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function ambilAktivitas($nim)
-    {
+    //public function ambilAktivitas($nim)
+    //{
+        //$this->db->select('*');
+        //$this->db->from('aktivitas');
+        //$this->db->join('pembimbing_mahasiswa', 'aktivitas.id_pembimbing_mahasiswa = pembimbing_mahasiswa.id_pembimbing_mahasiswa');
+        //$this->db->where('pembimbing_mahasiswa.nim', $nim);
+        //$query = $this->db->get();
+        //return $query->result();
+    //}
+
+    // aktivitas PKL
+    public function tampilDataAktivitasPKL($nim)
+	{
         $this->db->select('*');
         $this->db->from('aktivitas');
         $this->db->join('pembimbing_mahasiswa', 'aktivitas.id_pembimbing_mahasiswa = pembimbing_mahasiswa.id_pembimbing_mahasiswa');
         $this->db->where('pembimbing_mahasiswa.nim', $nim);
         $query = $this->db->get();
-        return $query->result();
+        $data = $query->result();
+        // var_dump($data);die;
+        return $data;
+	}
+
+    public function tambahdataAktivitasPKL($data)
+	{
+		// tulis nama tabel dan data yang dikirim lewat form
+		$this->db->insert('aktivitas', $data);
+		// cek jika data berhasil disimpan atau jika gagal buatkan pesan
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('pesan_berhasil', "Berhasil Tambah Data!");
+		} else {
+			$this->session->set_flashdata('pesan_gagal', "Gagal Tambah Data!");
+		}
+		redirect('cmahasiswa/tampilAktivitasPKL');
+	}
+
+    public function getIdPembimbingMahasiswa($nim){
+        $this->db->select('id_pembimbing_mahasiswa');
+        $this->db->from('pembimbing_mahasiswa');
+        $this->db->where('nim', $nim);
+        $query= $this->db->get();
+        $data = $query->result();
+        return $data[0]->id_pembimbing_mahasiswa;
     }
+    
 }
+

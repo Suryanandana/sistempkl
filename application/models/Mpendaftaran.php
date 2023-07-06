@@ -17,12 +17,13 @@
             {
                 // mengambil informasi terkait error. 
                 $error = $this->db->error();
-                echo $error['message'];
-                if(str_contains($error['message'], 'Duplicate entry')){
-                    if(str_contains($error['message'], 'PRIMARY')){
+                echo $errorMessage = $error['message'];
+                strpos($errorMessage,'PRIMARY');
+                if(strpos($errorMessage,'Duplicate') >= 0){
+                    if(strpos($errorMessage, 'PRIMARY') > 0){
                         $message = 'NIM yang anda registrasikan sudah terdaftar!';
                     }
-                    if(str_contains($error['message'], "'email'")){
+                    if(strpos($errorMessage, "'email'") > 0){
                         $message = "Email yang anda registrasikan sudah terdaftar!";
                     }
                 } else {
@@ -34,7 +35,7 @@
             else
             {
                 $this->db->trans_commit(); //menyimpan semua transaksi
-                $message = "Registrasi berhasil! Periksa email untuk melihat akun!";
+                $message = "Registrasi berhasil!";
                 $this->session->set_flashdata('regis_berhasil', $message);
             }
             $this->db->db_debug = $db_debug;
