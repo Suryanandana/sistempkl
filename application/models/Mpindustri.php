@@ -84,8 +84,6 @@ class Mpindustri extends CI_Model
 
     public function tambahDataNilai($data)
     {
-        $db_debug = $this->db->db_debug;
-        $this->db->db_debug = false;
         $this->db->insert('nilai', $data);
 
         if ($this->db->affected_rows() > 0) {
@@ -93,8 +91,23 @@ class Mpindustri extends CI_Model
         } else {
             $this->session->set_flashdata('pesan_gagal', "Gagal Memberi Nilai!");
         }
-        $this->db->db_debug = $db_debug;
         redirect('cpindustri/tampilnilai');
     }
 
+    // validasi aktivitas
+    public function tampilAktivitas($id)
+    {
+        $this->db->select('aktivitas.*, mahasiswa.nama_lengkap, mahasiswa.nim');
+        $this->db->join('pembimbing_mahasiswa', 'pembimbing_mahasiswa.id_pembimbing_mahasiswa = aktivitas.id_pembimbing_mahasiswa');
+        $this->db->join('mahasiswa', 'pembimbing_mahasiswa.nim = mahasiswa.nim');
+        $this->db->where('pembimbing_mahasiswa.id_pembimbing_industri', $id);
+        $query = $this->db->get('aktivitas');
+        return $query->result();
+    }
+
+    public function validasiAktivitas($data, $id_aktivitas){
+        $this->db->where('id_aktivitas', $id_aktivitas);
+        $this->db->update('aktivitas', $data);
+        return $this->db->affected_rows();
+    }
 }
