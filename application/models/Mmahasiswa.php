@@ -134,5 +134,28 @@ class Mmahasiswa extends CI_Model
         return $data[0]->id_pembimbing_mahasiswa;
     }
     
+    public function getDataBimbinganPkl($nim){
+        $this->db->select('bimbingan.*');
+        $this->db->from('bimbingan');
+        $this->db->join('pembimbing_mahasiswa', 'bimbingan.id_pembimbing_mahasiswa = pembimbing_mahasiswa.id_pembimbing_mahasiswa');
+        $this->db->where('pembimbing_mahasiswa.nim', $nim);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getJumlahBimbingan($id_pembimbing_mahasiswa)
+    {
+        $this->db->select('id_bimbingan');
+        $this->db->from('bimbingan');
+        $this->db->where('id_pembimbing_mahasiswa', $id_pembimbing_mahasiswa);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function simpanBimbingan($data)
+    {
+        $this->db->insert('bimbingan', $data);
+        return $this->db->affected_rows();
+    }
 }
 

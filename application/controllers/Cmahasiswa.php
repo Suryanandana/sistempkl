@@ -175,4 +175,40 @@ class Cmahasiswa extends CI_Controller
         $this->mmahasiswa->tambahdataaktivitaspkl($data);
     }
 
+    // fitur bimbingan mahasiswa
+    public function tampilBimbinganPKL()
+    {
+        $mahasiswa['bimbingan'] = $this->mmahasiswa->getDataBimbinganPkl($this->nim);
+        $data['content'] = $this->load->view('mahasiswa/bimbingan', $mahasiswa, TRUE);
+        $this->load->view('mahasiswa/main', $data);
+    }
+
+    public function simpanBimbingan()
+    {
+        $limitBimbingan = 4;
+        $id_pembimbing_mahasiswa = $this->mmahasiswa->getidpembimbingmahasiswa($this->nim);
+
+        $data = array(
+            'keterangan_bimbingan' => $this->input->post('keterangan_bimbingan'),
+            'tanggal_bimbingan' => $this->input->post('tanggal_bimbingan'),
+            'status' => "Belum Tervalidasi",
+            'id_pembimbing_mahasiswa' => $id_pembimbing_mahasiswa
+        );
+
+        $jumlahBimbingan = $this->mmahasiswa->getJumlahBimbingan($id_pembimbing_mahasiswa);
+
+        if($jumlahBimbingan>=$limitBimbingan){
+            $this->session->set_flashdata('pesan_gagal', 'Mahasiswa maksimal bimbingan 4 kali!');
+        } else {
+            $affected_rows = $this->mmahasiswa->simpanBimbingan($data);
+            if ($affected_rows > 0) {
+                $this->session->set_flashdata('pesan_berhasil', 'Data bimbingan berhasil disimpan!');
+            } else {
+                $this->session->set_flashdata('pesan_gagal', 'Data bimbingan gagal disimpan!');
+            }
+        }
+
+        redirect('cmahasiswa/tampilBimbinganPKL');
+    }
+
 }

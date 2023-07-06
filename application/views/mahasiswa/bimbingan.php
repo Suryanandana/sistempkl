@@ -7,10 +7,8 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
                 <h1 class="text-dark fw-bolder mt-1 mb-1 fs-2"></h1>
                 <ul class="breadcrumb fw-bold fs-base mb-1">
-                    <li class="breadcrumb-item text-muted">
-                        <a href="index.html" class="text-muted text-hover-primary">Home</a>
+                    <li class="breadcrumb-item text-muted">Aktivitas
                     </li>
-                    <li class="breadcrumb-item text-muted">Account</li>
                     <li class="breadcrumb-item text-dark">Bimbingan</li>
                 </ul>
             </div>
@@ -47,19 +45,19 @@
                     <table id="datatable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Keterangan Bimbingan</th>
-                                <th>Tanggal Bimbingan</th>
-                                <th>Status</th>
+                                <th class="fw-bold">No</th>
+                                <th class="fw-bold">Keterangan Bimbingan</th>
+                                <th class="fw-bold">Tanggal Bimbingan</th>
+                                <th class="fw-bold">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($data as $row): ?>
+                            foreach ($bimbingan as $row): ?>
                                 <tr>
                                     <td>
-                                        <?= $no++; ?>
+                                        <?= $no; ?>
                                     </td>
                                     <td>
                                         <?= $row->keterangan_bimbingan ?>
@@ -86,7 +84,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white">Form Upload Aktivitas</h5>
+                <h5 class="modal-title text-white">Form Upload Bimbingan</h5>
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
                     aria-label="Close">
@@ -95,7 +93,7 @@
                 <!--end::Close-->
             </div>
 
-            <form action="<?= base_url('cmahasiswa/#'); ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('cmahasiswa/simpanBimbingan'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-6">
@@ -108,13 +106,7 @@
                             <input type="date" class="form-control" name="tanggal_bimbingan" />
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <label>Status</label>
-                            <input type="text" class="form-control" name="status" />
-                        </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
                     <input type="submit" class="btn btn-primary" value="Simpan Data">
@@ -143,10 +135,4 @@
 
         }
     }
-function edit(baris, id) {
-// fungsinya sama seperti hapus hanya beda penamaan
-// document.getElementById('edit-idbimbingan').value = td[0].innerText
-// isi input id_industri dengan parameter id untuk menghapus baris
-document.getElementById('edit-id_bimbingan').value = id
-}
 </script>
