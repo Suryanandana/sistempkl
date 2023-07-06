@@ -57,17 +57,6 @@ class Cpindustri extends CI_Controller
         redirect('cpindustri/profile');
     }
 
-    public function tampilAktivitas()
-    {
-        $id_pembimbing_industri = $this->session->userdata('username');
-        $login['data'] = $this->mpindustri->pindustriLogin($id_pembimbing_industri);
-        $pMahasiswa = $this->mpindustri->dataBimbinganMahasiswa($id_pembimbing_industri);
-        var_dump($pMahasiswa);
-        die;
-        $data['content'] = $this->load->view('pindustri/profile', $login, true);
-        $this->load->view('pindustri/main', $data);
-    }
-
     public function tampilNilai()
     {
         $id_pembimbing_industri = $this->session->userdata('username');
@@ -97,5 +86,29 @@ class Cpindustri extends CI_Controller
                 $this->mpindustri->tambahDataNilai($data);
             }
         }
+    }
+
+    // validasi aktivitas
+    public function tampilAktivitas()
+    {
+        $id_pembimbing_industri = $this->session->userdata('username');
+        $login['aktivitas'] = $this->mpindustri->tampilAktivitas($id_pembimbing_industri);
+        $data['content'] = $this->load->view('pindustri/aktivitas', $login, true);
+        $this->load->view('pindustri/main', $data);
+    }
+
+    public function validasiAktivitas()
+    {
+        $id_aktivitas = $this->input->post('id_aktivitas');
+        $data = array(
+            'validasi_industri' => $this->input->post('validasi_industri')
+        );
+        $affected_rows = $this->mpindustri->validasiAktivitas($data, $id_aktivitas);
+        if ($affected_rows > 0) {
+            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil divalidasi');
+        } else {
+            $this->session->set_flashdata('pesan_gagal', 'Data gagal divalidasi');
+        }
+        return redirect('cpindustri/tampilAktivitas');
     }
 }

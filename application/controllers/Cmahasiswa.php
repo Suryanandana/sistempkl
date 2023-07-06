@@ -11,7 +11,7 @@ class Cmahasiswa extends CI_Controller
         // mengambil data mahasiswa yang login
         $this->nim = $this->session->userdata('username');
         $this->load->model('mvalidasi');
-        $this->mvalidasi->validasiadmin();
+        $this->mvalidasi->validasiMahasiswa();
     }
 
 
