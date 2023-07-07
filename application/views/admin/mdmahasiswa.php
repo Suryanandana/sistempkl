@@ -134,7 +134,7 @@
                 <div class="modal-body">
                     <!-- attribut for dan id harus sama sedangkan name harus sama dengan kolom pada db -->
                     <label for="tambah-nama">NIM</label>
-                    <input type="text" id="tambah-NIM" name="nim" class="form-control">
+                    <input type="text" id="tambah-NIM" name="nim" class="form-control" required>
                     <label for="tambah-nama">Email</label>
                     <input type="text" id="tambah-email" name="email" class="form-control">
                     <label for="tambah-nama">Nama Lengkap</label>

@@ -112,4 +112,26 @@ class Cpkampus extends CI_Controller
             }
         }
     }
+    public function tampilaktivitas()
+    {
+        $nip = $this->session->userdata('username');
+        $login['aktivitas'] = $this->mpkampus->tampilaktivitas($nip);
+        $data['content'] = $this->load->view('pkampus/aktivitas', $login, true);
+        $this->load->view('pkampus/main', $data);
+    }
+
+    public function validasiaktivitas()
+    {
+        $id_aktivitas = $this->input->post('id_aktivitas');
+        $data = array(
+            'validasi_kampus' => $this->input->post('validasi_kampus')
+        );
+        $affected_rows = $this->mpkampus->validasiAktivitas($data, $id_aktivitas);
+        if ($affected_rows > 0) {
+            $this->session->set_flashdata('pesan_berhasil', 'Data berhasil divalidasi');
+        } else {
+            $this->session->set_flashdata('pesan_gagal', 'Data gagal divalidasi');
+        }
+        return redirect('cpkampus/tampilaktivitas');
+    }
 }
