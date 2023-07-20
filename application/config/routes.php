@@ -56,4 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 // custom routes
 $route['login'] = 'cauthentication/tampilLogin';
 $route['register'] = 'cauthentication/tampilRegister';
+$route['lupa-password'] = 'cauthentication/tampilLupaPassword';
+$route['ubah-password'] = 'cauthentication/tampilUbahPassword';
 $route['admin'] = 'cadmin/index';

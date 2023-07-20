@@ -1,14 +1,29 @@
 <?php
 class Mlogin extends CI_Model
 {
-
 	function proseslogin()
 	{
 		$username = $this->input->post('Username');
-		$password = $this->input->post('Password');
+		// ambil data password dari database berdasarkan username
+		$this->db->select('password');
+		$this->db->from('login');
+		$this->db->where('username', $username);
+		$query = $this->db->get();
+		$data = $query->result();
+		$password = $data[0]->password;
+		// cek kesesuaian password masukan dengan password di database
+		if (password_verify($this->input->post('Password'), $password)) {
+			$this->ceklogin($username);
+		} else {
+			$this->session->set_flashdata('login_gagal', 'Login gagal! Username atau Password salah!');
+			redirect('login');
+		}
+	}
 
+	public function ceklogin($username)
+	{
 		$query = $this->db->select('*')->from('login')
-			->where('username', $username)->where('password', $password)
+			->where('username', $username)
 			->get();
 		if ($query->num_rows() > 0) {
 			//ada data	

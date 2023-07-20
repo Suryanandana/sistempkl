@@ -27,6 +27,12 @@
                             <button type="button" class="btn-close position-absolute" style="top:50%; transform: translateY(-50%);" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif ?>
+					<?php if ($this->session->has_userdata('login_berhasil')): ?>
+                        <div class="alert alert-success alert-dismissible fade show position-relative" role="alert">
+                            <?= $this->session->userdata('login_berhasil'); ?>
+                            <button type="button" class="btn-close position-absolute" style="top:50%; transform: translateY(-50%);" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
 						<div class="form-group position-relative has-icon-left mb-4">
 							<input type="text" class="form-control form-control-xl" placeholder="Username" id="Username" name="Username">
 							<div class="form-control-icon">
@@ -44,7 +50,7 @@
 					<div class="text-center mt-5 text-lg fs-4">
 						<p class="text-gray-600">Tidak memiliki akun?<br><a href="<?= base_url('/register') ?>"
 								class="font-bold">Daftar akun</a></p>
-						<p><a class="font-bold" href="auth-forgot-password.html">Lupa password?</a></p>
+						<p><a class="font-bold" href="<?= base_url("/lupa-password") ?>">Lupa password?</a></p>
 					</div>
 				</div>
 			</div>
