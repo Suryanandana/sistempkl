@@ -48,7 +48,7 @@
                                 <td>
                                     <?php if (isset($dataSurat[0]->dokumen)): ?>
                                         <a
-                                            href="<?= base_url('cmahasiswa/downloadDataSurat?file=' . $dataSurat[0]->dokumen) ?>">Download</a>
+                                            href="<?= base_url('resource\suratMahasiswafile=' . $dataSurat[0]->dokumen) ?>">Download</a>
                                     <?php else: ?>
                                         <span>Surat belum bisa didownload</span>
                                     <?php endif; ?>
@@ -56,7 +56,7 @@
                                 <td>
                                     <?php if (isset($surat[0]->dokumen)): ?>
                                         <a
-                                            href="<?= base_url('cmahasiswa/downloadSurat?file=' . $surat[0]->dokumen) ?>">Download</a>
+                                            href="<?= base_url('resource\suratMahasiswa' . $surat[0]->dokumen) ?>">Download</a>
                                     <?php else: ?>
                                         <span>Belum upload surat</span>
                                     <?php endif; ?>
@@ -84,7 +84,7 @@
                                 <td>
                                     <?php if (isset($surat[1]->dokumen)): ?>
                                         <a
-                                            href="<?= base_url('cmahasiswa/downloadSurat?file=' . $surat[1]->dokumen) ?>">Download</a>
+                                            href="<?= base_url('resource/suratMahasiswa/' . $surat[1]->dokumen) ?>">Download</a>
                                     <?php else: ?>
                                         <span>Surat Belum Bisa Didownload</span>
                                     <?php endif; ?>
