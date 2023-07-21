@@ -554,6 +554,7 @@ class Cadmin extends CI_Controller
     // surat resmi
     public function suratMhs()
     {
+        $data['suratMhs'] = $this->madmin->tampilSuratMahasiswa();
         $url = base_url('cadmin/suratMhs');
         $pencarian = $this->pencarianData();
         $jumlahIndustri = $this->madmin->tampilMhsValid(0, 0, $pencarian, true);

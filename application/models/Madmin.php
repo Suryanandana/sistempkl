@@ -450,6 +450,7 @@ class Madmin extends CI_Model
 			->where('jenis_surat', 'surat pengajuan')
 			->where('status', 'valid')
 			->get_compiled_select();
+
 		$this->db->distinct();
 		$this->db->select('mahasiswa.nim, nama_lengkap, kelas');
 		$this->db->from('mahasiswa');
@@ -467,6 +468,15 @@ class Madmin extends CI_Model
 			// echo "<pre>",var_dump($query->result()),"</pre>";die;
 			return $query->result();
 		}
+	}
+
+	public function tampilSuratMahasiswa()
+	{
+		$this->db->select('*');
+		$this->db->from('surat_mahasiswa');
+		$query = $this->db->get();
+		// var_dump($query->result());die;
+		return $query->result();
 	}
 
 	public function simpanSuratResmi($data)
@@ -497,6 +507,6 @@ class Madmin extends CI_Model
 		} else {
 			$this->session->set_flashdata('pesan_berhasil', 'Data berhasil disimpan!');
 		}
-		redirect('cadmin/tampilValidasiSurat');
+		redirect('cadmin/suratMhs');
 	}
 }
