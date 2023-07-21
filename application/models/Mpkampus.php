@@ -147,5 +147,21 @@
             $this->db->db_debug = $db_debug;
             redirect('cpkampus/tampilnilai');
         }
+
+        public function tampilaktivitas($id)
+    {
+        $this->db->select('aktivitas.*, mahasiswa.nama_lengkap, mahasiswa.nim');
+        $this->db->join('pembimbing_mahasiswa', 'pembimbing_mahasiswa.id_pembimbing_mahasiswa = aktivitas.id_pembimbing_mahasiswa');
+        $this->db->join('mahasiswa', 'pembimbing_mahasiswa.nim = mahasiswa.nim');
+        $this->db->where('pembimbing_mahasiswa.nip', $id);
+        $query = $this->db->get('aktivitas');
+        return $query->result();
     }
+
+    public function validasiaktivitas($data, $id_aktivitas){
+        $this->db->where('id_aktivitas', $id_aktivitas);
+        $this->db->update('aktivitas', $data);
+        return $this->db->affected_rows();
+    }
+}
 ?>

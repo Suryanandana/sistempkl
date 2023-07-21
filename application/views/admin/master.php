@@ -133,7 +133,7 @@
                     <div class="row row-cols-2">
                         <div class="col">
                             <label for="nim">NIM</label>
-                            <input type="text" id="nim" name="nim" class="form-control">
+                            <input type="text" id="nim" name="nim" class="form-control" required>
                         </div>
                         <div class="col">
                             <label for="nama">Nama Lengkap</label>

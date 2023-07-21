@@ -46,7 +46,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
+                                        <a class="menu-link" href="<?= base_url('cpkampus/tampilaktivitas') ?>">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -54,7 +54,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="<?= base_url('cpkampus/tampilbimbingan') ?>"">
+                                        <a class="menu-link" href="<?= base_url('cpkampus/tampilbimbingan') ?>">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span> 
