@@ -108,7 +108,27 @@
         {
             $db_debug = $this->db->db_debug;
             $this->db->db_debug = false;
-            $this->db->insert('nilai', $data);
+
+            // cek apakah nim sudah diberi nilai sebelumnya
+            $this->db->select('nilai_motivasi_industri, nilai_kreativitas_industri, nilai_disiplin_industri, nilai_pembahasan_industri');
+            $this->db->where('id_pembimbing_mahasiswa', $data['id_pembimbing_mahasiswa']);
+            $query = $this->db->get('nilai');
+            $nilai = $query->row_array();
+
+            if(empty($nilai)){
+                $this->db->insert('nilai', $data);
+            } else {
+                $total = 0;
+                foreach($nilai as $totalIndustri){
+                    $total += $totalIndustri;
+                }
+                $total += $data['nilai_motivasi_kampus'] + $data['nilai_kreativitas_kampus'] + $data['nilai_disiplin_kampus'] + $data['nilai_pembahasan_kampus'];
+                $rataRata = $total / 8;
+                $bulatkan=round($rataRata);
+                $data['total_nilai'] = $bulatkan;
+                $this->db->where('id_pembimbing_mahasiswa', $data['id_pembimbing_mahasiswa']);
+                $this->db->update('nilai', $data);
+            }
 
             $error = $this->db->error();
             if (str_contains($error['message'], 'Duplicate entry')) {

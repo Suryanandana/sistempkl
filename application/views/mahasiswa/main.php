@@ -73,6 +73,14 @@
                                             <span class="menu-title">Bimbingan</span>
                                         </a>
                                     </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="<?= base_url('cmahasiswa/tampilnilai') ?>">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Nilai Akhir</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="menu-item mb-1">
