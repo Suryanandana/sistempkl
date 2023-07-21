@@ -62,12 +62,12 @@ class Mpendaftaran extends CI_Model
 
         // timestamp sekarang versi real
         $tahun_sekarang = date('Y'); // tahun sekarang
-        $waktu_sekarang = date('Y-m-d'); // waktu sekarang
+        // $waktu_sekarang = date('Y-m-d'); // waktu sekarang
 
         // timestamp sekarang versi dummy
         // $tahun_masuk = "2022";
         // $tahun_sekarang = "2023";
-        // $waktu_sekarang = "2023-09-01";
+        $waktu_sekarang = "2023-09-01";
 
         // dapatkan semester
         if($waktu_sekarang >= $tahun_sekarang."-03-01" AND $waktu_sekarang <= $tahun_sekarang."-08-31"){

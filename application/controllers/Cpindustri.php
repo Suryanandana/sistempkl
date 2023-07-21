@@ -69,8 +69,7 @@ class Cpindustri extends CI_Controller
     public function inputNilai()
     {
         $nip = $this->session->userdata('username');
-        $nim = $this->input->post('nim'); 
-
+        $nim = $this->input->post('nim');
         if (!empty($nim)) {
             $mahasiswa = $this->mpindustri->nimPembimbingMahasiswa($nim);
             if (!empty($mahasiswa)) {
@@ -82,7 +81,6 @@ class Cpindustri extends CI_Controller
                     'nilai_pembahasan_industri' => $this->input->post('nilai_pembahasan_industri'),
                     'feedback_industri' => $this->input->post('feedback_industri')
                 );
-
                 $this->mpindustri->tambahDataNilai($data);
             }
         }
