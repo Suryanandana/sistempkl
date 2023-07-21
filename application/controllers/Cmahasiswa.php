@@ -75,6 +75,8 @@ class Cmahasiswa extends CI_Controller
         $login['dataSurat'] = $this->mmahasiswa->ambilDataSurat();
         // ambil surat yang sudah diupload mahasiswa
         $login['surat'] = $this->mmahasiswa->ambilSurat($this->nim);
+        $login['suratMhs'] = $this->mmahasiswa->ambilSuratMhs($this->nim);
+        // var_dump($login['surat']);die;
         // masukkan view profile ke variabel data['content']
         $data['content'] = $this->load->view('mahasiswa/surat', $login, TRUE);
         // tampilkan view profile ke view main
@@ -209,6 +211,15 @@ class Cmahasiswa extends CI_Controller
         }
 
         redirect('cmahasiswa/tampilBimbinganPKL');
+    }
+
+    public function tampilNilai()
+    {
+        $login['data'] = $this->mmahasiswa->mahasiswalogin($this->nim);
+        $id = $this->mmahasiswa->ambilIdPembimbingMhs($this->nim);
+        $login['nilai'] = $this->mmahasiswa->ambilNilai($id[0]->id_pembimbing_mahasiswa)[0];
+        $data['content'] = $this->load->view('mahasiswa/nilai', $login, TRUE);
+        $this->load->view('mahasiswa/main', $data);
     }
 
 }

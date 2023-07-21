@@ -107,7 +107,6 @@ class Cpkampus extends CI_Controller
                     'nilai_pembahasan_kampus' => $this->input->post('nilai_pembahasan_kampus'),
                     'feedback_kampus' => $this->input->post('feedback_kampus')
                 );
-
                 $this->mpkampus->tambahdatanilai($data);
             }
         }

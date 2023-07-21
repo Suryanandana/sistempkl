@@ -39,7 +39,8 @@
                                         <th>no</th>
                                         <th>nim</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Kelas</th>
+                                        <th>Surat Resmi</th>
+                                        <th>Surat Bimbingan</th>
                                         <!-- <th>surat resmi</th>
                                         <th>surat bimbingan</th> -->
                                         <th>Aksi</th>
@@ -58,7 +59,28 @@
                                                 <?= $row->nama_lengkap ?>
                                             </td>
                                             <td>
-                                                <?= $row->kelas ?>
+                                                <?php $kosong = true; ?>
+                                                <?php for($i=0; $i<count($suratMhs); $i++): ?>
+                                                    <?php if($suratMhs[$i]->jenis_surat == "surat resmi pkl" AND $suratMhs[$i]->nim == $row->nim ): ?>
+                                                        <a href="<?php echo base_url() . 'resource/suratResmiPKL/' . $suratMhs[$i]->dokumen ?>" target="__blank">Download</a>
+                                                        <?php $kosong = false; ?>
+                                                    <?php endif; ?>
+                                                <?php endfor ?>
+                                                <?php if($kosong): ?>
+                                                    <span>Surat belum diupload</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php $kosong = true; ?>
+                                                <?php for($i=0; $i<count($suratMhs); $i++): ?>
+                                                    <?php if($suratMhs[$i]->jenis_surat == "surat bimbingan" AND $suratMhs[$i]->nim == $row->nim ): ?>
+                                                        <a href="<?php echo base_url() . 'resource/suratResmiPKL/' . $suratMhs[$i]->dokumen ?>" target="__blank">Download</a>
+                                                        <?php $kosong = false; ?>
+                                                    <?php endif; ?>
+                                                <?php endfor ?>
+                                                <?php if($kosong): ?>
+                                                    <span>Surat belum diupload</span>
+                                                <?php endif; ?>
                                             </td>
                                             <!-- <td>
                                                 <?php //if(isset($row->surat_resmi)) : ?>

@@ -46,57 +46,85 @@
                             <tr>
                                 <th>Surat Pengajuan PKL</th>
                                 <td>
-                                    <?php if (isset($dataSurat[0]->dokumen)): ?>
-                                        <a
-                                            href="<?= base_url('resource\suratMahasiswafile=' . $dataSurat[0]->dokumen) ?>">Download</a>
-                                    <?php else: ?>
-                                        <span>Surat belum bisa didownload</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($dataSurat); $i++): ?>
+                                        <?php if (isset($dataSurat[$i])): ?>
+                                            <?php if ($dataSurat[$i]->jenis_surat == "surat pengajuan"): ?>
+                                                <a href="<?= base_url('resource/file/' . $dataSurat[$i]->dokumen) ?>"
+                                                    target="__blank">Download</a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Surat belum bisa didownload" : ""; ?>
                                 </td>
                                 <td>
-                                    <?php if (isset($surat[0]->dokumen)): ?>
-                                        <a
-                                            href="<?= base_url('resource\suratMahasiswa' . $surat[0]->dokumen) ?>">Download</a>
-                                    <?php else: ?>
-                                        <span>Belum upload surat</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($surat); $i++): ?>
+                                        <?php if (isset($surat[$i])): ?>
+                                            <?php if ($surat[$i]->jenis_surat == "surat pengajuan"): ?>
+                                                <a href="<?= base_url('resource\suratMahasiswa' . $surat[$i]->dokumen) ?>"><?= $surat[$i]->jenis_surat ?></a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
                                 </td>
                                 <td>
-                                    <?php if (isset($surat[0]->status)): ?>
-                                        <span>
-                                            <?= $surat[0]->status ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span>Belum upload surat</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($surat); $i++): ?>
+                                        <?php if (isset($surat[$i])): ?>
+                                            <?php if ($surat[$i]->jenis_surat == "surat pengajuan"): ?>
+                                                <span>
+                                                    <?= $surat[$i]->status ?>
+                                                </span>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Surat Pengantar PKL</th>
                                 <td>
-                                    <?php if (isset($dataSurat[1]->dokumen)): ?>
-                                        <a
-                                            href="<?= base_url('cmahasiswa/downloadDataSurat?file=' . $dataSurat[1]->dokumen) ?>">Download</a>
-                                    <?php else: ?>
-                                        <span>Surat Belum Bisa Didownload</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($dataSurat); $i++): ?>
+                                        <?php if (isset($dataSurat[$i])): ?>
+                                            <?php if ($dataSurat[$i]->jenis_surat == "surat pengantar"): ?>
+                                                <a href="<?= base_url('resource/file/' . $dataSurat[$i]->dokumen) ?>"
+                                                    target="__blank">Download</a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Surat belum bisa didownload" : ""; ?>
                                 </td>
                                 <td>
-                                    <?php if (isset($surat[1]->dokumen)): ?>
-                                        <a
-                                            href="<?= base_url('resource/suratMahasiswa/' . $surat[1]->dokumen) ?>">Download</a>
-                                    <?php else: ?>
-                                        <span>Surat Belum Bisa Didownload</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($surat); $i++): ?>
+                                        <?php if (isset($surat[$i])): ?>
+                                            <?php if ($surat[$i]->jenis_surat == "surat pengantar"): ?>
+                                                <a href="<?= base_url('resource\suratMahasiswa' . $surat[$i]->dokumen) ?>"><?= $surat[$i]->jenis_surat ?></a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
                                 </td>
                                 <td>
-                                    <?php if (isset($surat[1]->status)): ?>
-                                        <span>
-                                            <?= $surat[1]->status ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span>Belum upload surat</span>
-                                    <?php endif; ?>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($surat); $i++): ?>
+                                        <?php if (isset($surat[$i])): ?>
+                                            <?php if ($surat[$i]->jenis_surat == "surat pengantar"): ?>
+                                                <span>
+                                                    <?= $surat[$i]->status ?>
+                                                </span>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -107,17 +135,41 @@
                         <thead>
                             <tr>
                                 <th class="fw-bolder">Jenis Surat</th>
-                                <th class="fw-bolder"></th>
+                                <th class="fw-bolder">Download surat</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th>Surat Resmi PKL</th>
-                                <td>Jacob</td>
+                                <td>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($suratMhs); $i++): ?>
+                                        <?php if (isset($suratMhs[$i])): ?>
+                                            <?php if ($suratMhs[$i]->jenis_surat == "surat resmi pkl"): ?>
+                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>"
+                                                    target="__blank">Download</a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Surat Bimbingan PKL</th>
-                                <td>Jacob</td>
+                                <td>
+                                    <?php $kosong = true; ?>
+                                    <?php for ($i = 0; $i < count($suratMhs); $i++): ?>
+                                        <?php if (isset($suratMhs[$i])): ?>
+                                            <?php if ($suratMhs[$i]->jenis_surat == "surat bimbingan"): ?>
+                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>"
+                                                    target="__blank">Download</a>
+                                                <?php $kosong = false; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endfor ?>
+                                    <?= ($kosong) ? "Belum upload surat" : ""; ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -171,7 +223,7 @@
                             <label>Jenis Surat</label>
                             <select name="jenis_surat" class="form-select">
                                 <option value="surat pengajuan">Surat Pengajuan</option>
-                                <option value="surat pengantar">Surat Resmi PKL</option>
+                                <option value="surat pengantar">Surat Pengantar</option>
                             </select>
                         </div>
                     </div>

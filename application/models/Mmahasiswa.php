@@ -43,6 +43,12 @@ class Mmahasiswa extends CI_Model
         }
     }
 
+    public function ambilSuratMhs($nim)
+    {
+        $query = $this->db->select('*')->from('surat_mahasiswa')->where('nim', $nim)->get();
+        return $query->result();
+    }
+
     public function ambilDataSurat()
     {
         $query = $this->db->select('*')->from('data_surat')->get();
@@ -156,6 +162,24 @@ class Mmahasiswa extends CI_Model
     {
         $this->db->insert('bimbingan', $data);
         return $this->db->affected_rows();
+    }
+
+    public function ambilIdPembimbingMhs($nim)
+    {
+        $this->db->select('id_pembimbing_mahasiswa');
+        $this->db->from('pembimbing_mahasiswa');
+        $this->db->where('nim', $nim);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function ambilNilai($id)
+    {
+        $this->db->select('*');
+        $this->db->from('nilai');
+        $this->db->where('id_pembimbing_mahasiswa', $id);
+        $query = $this->db->get();
+        return $query->result();
     }
 }
 
