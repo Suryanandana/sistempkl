@@ -44,21 +44,21 @@
                         <tbody>
                             <tr>
                                 <th>Pembimbing Kampus</th>
-                                <td><?= $nilai->nilai_motivasi_kampus ?></td>
-                                <td><?= $nilai->nilai_kreativitas_kampus ?></td>
-                                <td><?= $nilai->nilai_disiplin_kampus ?></td>
-                                <td><?= $nilai->nilai_pembahasan_kampus ?></td>
+                                <td><?= ($nilai->nilai_motivasi_kampus) ? $nilai->nilai_motivasi_kampus : "Nilai Belum diinput" ?></td>
+                                <td><?= ($nilai->nilai_kreativitas_kampus) ? $nilai->nilai_kreativitas_kampus : "Nilai Belum diinput" ?></td>
+                                <td><?= ($nilai->nilai_disiplin_kampus) ? $nilai->nilai_disiplin_kampus : "Nilai Belum diinput" ?></td>
+                                <td><?= ($nilai->nilai_pembahasan_kampus) ? $nilai->nilai_pembahasan_kampus : "Nilai Belum diinput" ?></td>
                             </tr>
                             <tr>
                                 <th>Pembimbing Industri</th>
-                                <td><?= $nilai->nilai_motivasi_industri ?></td>
-                                <td><?= $nilai->nilai_kreativitas_industri ?></td>
-                                <td><?= $nilai->nilai_disiplin_industri ?></td>
-                                <td><?= $nilai->nilai_pembahasan_industri ?></td>
+                                <td><?= ($nilai->nilai_motivasi_industri) ? $nilai->nilai_motivasi_industri : "Nilai Belum diinput"?></td>
+                                <td><?= ($nilai->nilai_kreativitas_industri) ? $nilai->nilai_kreativitas_industri : "Nilai Belum diinput"?></td>
+                                <td><?= ($nilai->nilai_disiplin_industri) ? $nilai->nilai_disiplin_industri : "Nilai Belum diinput"?></td>
+                                <td><?= ($nilai->nilai_pembahasan_industri) ? $nilai->nilai_pembahasan_industri : "Nilai Belum diinput"?></td>
                             </tr>
                             <tr>
                                 <th class="fw-bold">Nilai Total</th>
-                                <th class="fw-bold"><?= $nilai->total_nilai ?></th>
+                                <th class="fw-bold"><?= ($nilai->total_nilai) ? $nilai->total_nilai : "Nilai Belum terisi semua" ?></th>
                             </tr>
                         </tbody>
                     </table>
