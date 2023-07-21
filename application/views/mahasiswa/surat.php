@@ -63,7 +63,7 @@
                                     <?php for ($i = 0; $i < count($surat); $i++): ?>
                                         <?php if (isset($surat[$i])): ?>
                                             <?php if ($surat[$i]->jenis_surat == "surat pengajuan"): ?>
-                                                <a href="<?= base_url('resource\suratMahasiswa' . $surat[$i]->dokumen) ?>"><?= $surat[$i]->jenis_surat ?></a>
+                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>" target="__blank"><?= $surat[$i]->jenis_surat ?></a>
                                                 <?php $kosong = false; ?>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -105,7 +105,7 @@
                                     <?php for ($i = 0; $i < count($surat); $i++): ?>
                                         <?php if (isset($surat[$i])): ?>
                                             <?php if ($surat[$i]->jenis_surat == "surat pengantar"): ?>
-                                                <a href="<?= base_url('resource\suratMahasiswa' . $surat[$i]->dokumen) ?>"><?= $surat[$i]->jenis_surat ?></a>
+                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>" target="__blank"><?= $surat[$i]->jenis_surat ?></a>
                                                 <?php $kosong = false; ?>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -146,7 +146,7 @@
                                     <?php for ($i = 0; $i < count($suratMhs); $i++): ?>
                                         <?php if (isset($suratMhs[$i])): ?>
                                             <?php if ($suratMhs[$i]->jenis_surat == "surat resmi pkl"): ?>
-                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>"
+                                                <a href="<?= base_url('resource/suratResmiPKL/' . $suratMhs[$i]->dokumen) ?>"
                                                     target="__blank">Download</a>
                                                 <?php $kosong = false; ?>
                                             <?php endif; ?>
@@ -162,7 +162,7 @@
                                     <?php for ($i = 0; $i < count($suratMhs); $i++): ?>
                                         <?php if (isset($suratMhs[$i])): ?>
                                             <?php if ($suratMhs[$i]->jenis_surat == "surat bimbingan"): ?>
-                                                <a href="<?= base_url('resource/suratMahasiswa/' . $surat[$i]->dokumen) ?>"
+                                                <a href="<?= base_url('resource/suratResmiPKL/' . $suratMhs[$i]->dokumen) ?>"
                                                     target="__blank">Download</a>
                                                 <?php $kosong = false; ?>
                                             <?php endif; ?>

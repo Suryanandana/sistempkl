@@ -69,7 +69,6 @@ class Cpendaftaran extends CI_Controller
         if($status){
             $this->mpendaftaran->insert_data($data1, $data2);
         }
-        $this->session->set_flashdata('regis_gagal', "gagal");
         redirect('register');
     }
 

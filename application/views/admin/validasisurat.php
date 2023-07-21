@@ -58,7 +58,7 @@
                                             </td>
                                             <td>
                                                 <a
-                                                    href="<?= base_url('cadmin/downloadSurat?file=' . $row->dokumen) ?>">Download
+                                                    href="<?= base_url('resource/suratMahasiswa/' . $row->dokumen) ?>" target="__blank">Download
                                                 </a>
                                             </td>
                                             <td>

@@ -644,9 +644,6 @@ class Cadmin extends CI_Controller
         $id = $this->input->post('id_surat');
         // ambil data perubahan untuk disimpan
         $data = array(
-            'nim' => $this->input->post('nim'),
-            'jenis_surat' => $this->input->post('jenis_surat'),
-            'dokumen' => $this->input->post('dokumen'),
             'status' => $this->input->post('status'),
         );
         $this->madmin->editValidasiSurat($id, $data);

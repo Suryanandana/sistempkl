@@ -135,16 +135,6 @@
                             <input type="file" class="form-control" name="dokumen" />
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <label>Validasi Kampus</label>
-                            <input type="text" class="form-control" name="validasi_kampus" />
-                        </div>
-                        <div class="col-6">
-                            <label>Validasi Industri</label>
-                            <input type="text" class="form-control" name="validasi_industri" />
-                        </div>
-                    </div>
                 </div>
 
                 <div class="modal-footer">
