@@ -49,9 +49,9 @@
                                 <tbody>
                                     <?php foreach ($data as $row): ?>
                                         <tr id="baris<?= $no ?>">
-                                            <th scope="row">
+                                            <td scope="row">
                                                 <?= $no ?>
-                                            </th>
+                                            </td>
                                             <td>
                                                 <?= $row->nama ?>
                                             </td>
@@ -182,9 +182,9 @@
         // dan isi valuenya dengan kolom index ke 0 yaitu nama
         // jika kolom dengan index ke 1 artinya alamat dan seterusnya
         //  sesuai dengan urutan pada kolom tabel diatas kecuali no dan aksi tidak dihitung
-        document.getElementById('hapus-nama').value = td[0].innerText
-        document.getElementById('hapus-alamat').value = td[1].innerText
-        document.getElementById('hapus-telp').value = td[2].innerText
+        document.getElementById('hapus-nama').value = td[1].innerText
+        document.getElementById('hapus-alamat').value = td[2].innerText
+        document.getElementById('hapus-telp').value = td[3].innerText
         // isi input id_industri dengan parameter id untuk menghapus baris
         document.getElementById('hapus-id_industri').value = id;
     }
@@ -193,9 +193,9 @@
         // fungsinya sama seperti hapus hanya beda penamaan
         const td = document.querySelectorAll('#' + baris + ' td');
 
-        document.getElementById('edit-nama').value = td[0].innerText
-        document.getElementById('edit-alamat').value = td[1].innerText
-        document.getElementById('edit-telp').value = td[2].innerText
+        document.getElementById('edit-nama').value = td[1].innerText
+        document.getElementById('edit-alamat').value = td[2].innerText
+        document.getElementById('edit-telp').value = td[3].innerText
 
         document.getElementById('edit-id_industri').value = id;
     }

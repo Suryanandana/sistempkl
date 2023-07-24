@@ -52,8 +52,6 @@ class Cpendaftaran extends CI_Controller
     function insert_data()
     {
         $data1 = array(
-            // mengambil nilai dari sebuah input form yang diberi nama 'email'
-            // dan menetapkan nilainya ke dalam sebuah array dengan kunci 'email'.
             'nim' => $this->input->post('nim'),
             'nama_lengkap' => $this->input->post('nama_lengkap'),
             'email' => $this->input->post('email')
